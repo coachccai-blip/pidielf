@@ -11,6 +11,8 @@ const base = process.env.BASE_PATH ?? '/pidielf/';
 
 export default defineConfig({
   base,
+  // Permet de lancer plusieurs serveurs de développement en parallèle sans partager le cache.
+  cacheDir: process.env.VITE_CACHE_DIR ?? 'node_modules/.vite',
   define: { __APP_VERSION__: JSON.stringify(pkg.version) },
   resolve: {
     alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) },

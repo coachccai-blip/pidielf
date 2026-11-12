@@ -86,7 +86,7 @@ export default function Pivoter({ inputs, run }: ToolProps) {
                     )}
                   >
                     <span className="grid aspect-square w-full place-items-center">
-                      <PageThumb pdf={pdf} page={page} width={140} rotate={active ? angle : 0} className="max-h-full w-[78%]" />
+                      <PageThumb pdf={pdf} page={page} width={140} rotate={active ? angle : 0} contain />
                     </span>
                     <span className={cn('text-xs font-bold tabular-nums', active ? 'text-cat-ink' : 'text-ink-soft')}>{page}</span>
                   </button>

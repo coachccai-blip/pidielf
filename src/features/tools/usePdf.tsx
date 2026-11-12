@@ -78,6 +78,7 @@ export function PageThumb({
   rotate = 0,
   className,
   onSize,
+  contain,
 }: {
   pdf: PDFDocumentProxy | null;
   page: number;
@@ -85,6 +86,8 @@ export function PageThumb({
   rotate?: number;
   className?: string;
   onSize?: (size: PageSize) => void;
+  /** Ajuste la miniature pour tenir dans un parent carré, quelle que soit son orientation. */
+  contain?: boolean;
 }) {
   const holder = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -139,11 +142,12 @@ export function PageThumb({
   }, [pdf, page, visible, width]);
 
   const quarter = ((rotate % 360) + 360) % 180 === 90;
+  const shown = quarter ? 1 / ratio : ratio; // hauteur / largeur de la miniature affichée
   return (
     <div
       ref={holder}
       className={cn('relative grid place-items-center overflow-hidden', className)}
-      style={{ aspectRatio: quarter ? `${ratio} / 1` : `1 / ${ratio}` }}
+      style={{ aspectRatio: `1 / ${shown}`, width: contain ? `${Math.min(1, 1 / shown) * 100}%` : undefined }}
     >
       <canvas
         ref={canvasRef}

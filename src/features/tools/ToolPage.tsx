@@ -196,7 +196,9 @@ export default function ToolPage({ toolId, fileIds }: { toolId: string; fileIds:
         ))}
         {step !== 'choose' && (
           <li className="ml-auto">
-            <Button size="sm" variant="ghost" icon={<RotateCcw />} onClick={restart}>{t('tools.restart')}</Button>
+            <Button size="sm" variant="ghost" icon={<RotateCcw />} onClick={restart} aria-label={t('tools.restart')}>
+              <span className="hidden sm:inline">{t('tools.restart')}</span>
+            </Button>
           </li>
         )}
       </ol>

@@ -139,7 +139,7 @@ function Row({
       <div className="min-w-0 flex-1">
         <p className="truncate font-bold">{input.name}</p>
         <p className="text-xs text-ink-soft">{t('common.pages', { count: input.pageCount })} · {formatBytes(input.blob.size)}</p>
-        <label className="mt-1 flex items-center gap-2 text-xs text-ink-soft">
+        <label className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-ink-soft">
           <span className="shrink-0">{t('fusionner.keep')}</span>
           <input
             value={range}
@@ -147,7 +147,7 @@ function Row({
             placeholder={t('fusionner.allPages')}
             inputMode="text"
             aria-invalid={invalid}
-            className={cn(inputClass, 'min-h-9 max-w-40 text-sm', invalid && 'border-danger')}
+            className={cn(inputClass, 'min-h-9 w-32 flex-1 text-sm sm:max-w-40', invalid && 'border-danger')}
           />
         </label>
       </div>

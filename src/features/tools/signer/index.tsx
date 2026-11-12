@@ -203,12 +203,12 @@ function Session({ input, run }: { input: InputFile; run: ToolProps['run'] }) {
               {t('signer.notice')}
             </p>
             <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
-              <Button variant="cat" icon={<Signature />} onClick={(e) => openMenu('signature', e)}>{t('signer.add.signature')}</Button>
-              <Button icon={<PenLine />} onClick={(e) => openMenu('initials', e)}>{t('signer.add.initials')}</Button>
-              <Button icon={<CalendarDays />} onClick={addDate}>{t('signer.add.date')}</Button>
-              <Button icon={<Type />} onClick={addText}>{t('signer.add.text')}</Button>
+              <Button variant="cat" icon={<Signature />} disabled={!editor.ready} onClick={(e) => openMenu('signature', e)}>{t('signer.add.signature')}</Button>
+              <Button icon={<PenLine />} disabled={!editor.ready} onClick={(e) => openMenu('initials', e)}>{t('signer.add.initials')}</Button>
+              <Button icon={<CalendarDays />} disabled={!editor.ready} onClick={addDate}>{t('signer.add.date')}</Button>
+              <Button icon={<Type />} disabled={!editor.ready} onClick={addText}>{t('signer.add.text')}</Button>
             </div>
-            {saved && saved.length > 0 && (
+            {editor.ready && saved && saved.length > 0 && (
               <section aria-label={t('signer.saved')} className="flex flex-col gap-1.5">
                 <p className="text-xs font-bold text-ink-soft">{t('signer.saved')}</p>
                 <ul className="scrollbar-thin flex gap-2 overflow-x-auto pb-1">

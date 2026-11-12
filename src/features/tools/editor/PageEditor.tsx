@@ -219,7 +219,8 @@ export function PageEditor({
           },
         }
       : null;
-  }, [editor.view, pageSize, desktop]);
+    editor.setReady(!!pageSize);
+  }, [editor.view, editor.setReady, pageSize, desktop]);
 
   // Un doigt posé sur un élément le déplace : l'écran ne doit pas défiler à sa place. `touch-action` ne suffit
   // pas sur les éléments SVG dans tous les navigateurs ; on refuse donc le défilement dès le toucher.

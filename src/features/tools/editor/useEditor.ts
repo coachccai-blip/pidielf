@@ -98,6 +98,9 @@ export interface Editor {
   announcement: string;
   announce: (message: string) => void;
   view: React.RefObject<EditorView | null>;
+  /** La page est affichée : on peut y poser des éléments. */
+  ready: boolean;
+  setReady: (ready: boolean) => void;
 }
 
 let counter = 0;
@@ -120,6 +123,7 @@ export function useEditor(): Editor {
   const [mode, setModeState] = useState<ToolMode>({ kind: 'select' });
   const [announcement, setAnnouncement] = useState('');
   const view = useRef<EditorView | null>(null);
+  const [ready, setReady] = useState(false);
   const lastGroup = useRef<{ key: string; time: number } | null>(null);
 
   // Les fonctions ci-dessous lisent l'état le plus récent sans changer d'identité.
@@ -260,5 +264,7 @@ export function useEditor(): Editor {
     announcement,
     announce: setAnnouncement,
     view,
+    ready,
+    setReady,
   };
 }

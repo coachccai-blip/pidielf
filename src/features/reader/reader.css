@@ -1,0 +1,114 @@
+/* Lecteur : thèmes de papier, couche de texte de pdf.js, voile de confort. */
+
+.reader {
+  --paper: #ffffff;
+  --paper-ink: #1c2321;
+  --paper-soft: #5f6b68;
+  --desk: #ecebe6;
+  --hl-blend: multiply;
+  background: var(--desk);
+  color: var(--paper-ink);
+}
+.reader[data-paper='sepia'] { --paper: #f6ecd6; --paper-ink: #3d3222; --paper-soft: #6d5f48; --desk: #e9dec4; }
+.reader[data-paper='grey'] { --paper: #e4e4e0; --paper-ink: #24292a; --paper-soft: #555d5c; --desk: #d2d2cd; }
+.reader[data-paper='night'] { --paper: #14191b; --paper-ink: #c9d0cc; --paper-soft: #909b97; --desk: #0b0e0f; --hl-blend: screen; }
+
+/* La page PDF est rendue sur fond blanc ; le thème est appliqué par mélange. */
+.reader .pdf-sheet { background: var(--paper); }
+.reader .pdf-sheet canvas { display: block; width: 100%; height: 100%; }
+.reader[data-paper='sepia'] .pdf-sheet canvas,
+.reader[data-paper='grey'] .pdf-sheet canvas { mix-blend-mode: multiply; }
+.reader[data-paper='night'] .pdf-sheet canvas { filter: invert(0.92) hue-rotate(180deg) contrast(0.92); }
+
+/* Couche de texte (sélection, copie) — adaptée de la feuille de style de pdf.js. */
+.textLayer {
+  color-scheme: only light;
+  position: absolute;
+  text-align: initial;
+  inset: 0;
+  overflow: clip;
+  line-height: 1;
+  letter-spacing: normal;
+  word-spacing: normal;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  forced-color-adjust: none;
+  transform-origin: 0 0;
+  z-index: 2;
+  --min-font-size: 1;
+  --text-scale-factor: calc(var(--total-scale-factor) * var(--min-font-size));
+  --min-font-size-inv: calc(1 / var(--min-font-size));
+}
+.textLayer :is(span, br) {
+  color: transparent;
+  position: absolute;
+  white-space: pre;
+  cursor: text;
+  transform-origin: 0% 0%;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.textLayer > :not(.markedContent),
+.textLayer .markedContent span:not(.markedContent) {
+  z-index: 1;
+  --font-height: 0;
+  font-size: calc(var(--text-scale-factor) * var(--font-height));
+  --scale-x: 1;
+  --rotate: 0deg;
+  transform: rotate(var(--rotate)) scaleX(var(--scale-x)) scale(var(--min-font-size-inv));
+}
+.textLayer .markedContent { display: contents; }
+.textLayer span[role='img'] { user-select: none; cursor: default; }
+.textLayer ::selection { background: color-mix(in srgb, #3b82f6 35%, transparent); color: transparent; }
+.textLayer br::selection { background: transparent; }
+.textLayer .endOfContent { display: block; position: absolute; inset: 100% 0 0; z-index: 0; cursor: default; user-select: none; }
+.textLayer[data-main-rotation='90'] { transform: rotate(90deg) translateY(-100%); }
+.textLayer[data-main-rotation='180'] { transform: rotate(180deg) translate(-100%, -100%); }
+.textLayer[data-main-rotation='270'] { transform: rotate(270deg) translateX(-100%); }
+
+/* Pendant un dessin ou la pose d'une note, le texte ne capte plus les gestes. */
+.reader[data-tool='ink'] .textLayer,
+.reader[data-tool='note'] .textLayer { pointer-events: none; }
+
+.reader .hl { position: absolute; border-radius: 2px; mix-blend-mode: var(--hl-blend); pointer-events: none; }
+.reader .hl-yellow { background: rgb(255 221 87 / 0.55); }
+.reader .hl-green { background: rgb(140 222 150 / 0.55); }
+.reader .hl-blue { background: rgb(140 198 255 / 0.55); }
+.reader .hl-pink { background: rgb(255 160 200 / 0.55); }
+.reader[data-paper='night'] .hl { opacity: 0.45; }
+.reader .ul { position: absolute; pointer-events: none; border-bottom: 2px solid currentColor; }
+.reader .search-hit { position: absolute; border-radius: 2px; background: rgb(255 170 60 / 0.4); pointer-events: none; mix-blend-mode: var(--hl-blend); }
+.reader .search-hit.current { background: rgb(255 120 30 / 0.65); outline: 2px solid rgb(230 100 20 / 0.9); }
+
+/* Mode Texte : une page calme, comme dans un livre numérique. */
+.reflow {
+  color: var(--paper-ink);
+  background: var(--paper);
+  hyphens: auto;
+  overflow-wrap: break-word;
+  font-kerning: normal;
+}
+.reflow h2 { font-family: var(--font-display); font-size: 1.7em; line-height: 1.2; margin: 1.4em 0 0.6em; text-align: left; hyphens: manual; }
+.reflow h3 { font-family: var(--font-display); font-size: 1.3em; line-height: 1.25; margin: 1.2em 0 0.5em; text-align: left; hyphens: manual; }
+.reflow p { margin: 0 0 0.9em; }
+.reflow figure { margin: 1.2em 0; }
+.reflow figure img { display: block; max-width: 100%; height: auto; margin: 0 auto; border-radius: 4px; }
+.reader[data-paper='night'] .reflow figure img { filter: brightness(0.8); }
+.reflow .page-mark { display: flex; align-items: center; gap: 0.75rem; margin: 1.6em 0; font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; color: var(--paper-soft); }
+.reflow .page-mark::before, .reflow .page-mark::after { content: ''; flex: 1; height: 1px; background: color-mix(in srgb, var(--paper-soft) 35%, transparent); }
+
+/* Polices de lecture, chargées avec le lecteur seulement. */
+@font-face {
+  font-family: 'Literata Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200 900;
+  src: url('@fontsource-variable/literata/files/literata-latin-wght-normal.woff2') format('woff2-variations');
+}
+@font-face {
+  font-family: 'Literata Variable';
+  font-style: italic;
+  font-display: swap;
+  font-weight: 200 900;
+  src: url('@fontsource-variable/literata/files/literata-latin-wght-italic.woff2') format('woff2-variations');
+}

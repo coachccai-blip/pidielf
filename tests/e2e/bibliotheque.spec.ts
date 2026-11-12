@@ -1,5 +1,4 @@
-import { expect, test } from '@playwright/test';
-import { fixture, importToLibrary, isMobile, open } from './helpers';
+import { expect, fixture, importToLibrary, isMobile, open, test } from './helpers';
 
 test.describe('bibliothèque et lecteur', () => {
   test('un PDF importé réapparaît après rechargement et se rouvre à la bonne page', async ({ page }) => {

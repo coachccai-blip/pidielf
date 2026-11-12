@@ -1,8 +1,23 @@
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readFile } from 'node:fs/promises';
-import { expect, type Download, type Page } from '@playwright/test';
+import { expect, test as base, type Download, type Page } from '@playwright/test';
 import { PDFDocument } from '@cantoo/pdf-lib';
+
+/**
+ * Sur bureau, l'application ouvre la fenêtre « Enregistrer sous » du système, qu'un
+ * navigateur sans affichage ne peut pas présenter : les tests passent par le
+ * téléchargement classique (le repli prévu pour les navigateurs qui n'ont pas cette fenêtre).
+ */
+export const test = base.extend({
+  page: async ({ page }, use) => {
+    await page.addInitScript(() => {
+      delete (window as { showSaveFilePicker?: unknown }).showSaveFilePicker;
+    });
+    await use(page);
+  },
+});
+export { expect };
 
 const here = dirname(fileURLToPath(import.meta.url));
 export const fixture = (name: string): string => join(here, '..', 'fixtures', name);

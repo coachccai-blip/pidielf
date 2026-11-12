@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { PDFDocument, StandardFonts, degrees, rgb } from '@cantoo/pdf-lib';
+import { PDFDocument, PDFName, PDFNumber, PDFString, PDFHexString, StandardFonts, degrees, rgb } from '@cantoo/pdf-lib';
 import sharp from 'sharp';
 
 const require = createRequire(import.meta.url);
@@ -39,6 +39,36 @@ async function textPdf(pageCount, title, options = {}) {
     }
     if (options.rotateSecond && i === 2) page.setRotation(degrees(90));
   }
+  return doc.save({ useObjectStreams: false });
+}
+
+// PDF avec sommaire (signets) et liens : trois chapitres de deux pages,
+// un lien interne vers la page 5 et un lien externe sur la page 1.
+async function outlinePdf() {
+  const doc = await PDFDocument.load(await textPdf(6, 'Chapitres'));
+  const pages = doc.getPages();
+  const ctx = doc.context;
+  const titles = ['Chapitre un', 'Chapitre deux', 'Chapitre trois'];
+  const outlinesRef = ctx.nextRef();
+  const refs = titles.map(() => ctx.nextRef());
+  titles.forEach((title, i) => {
+    const item = ctx.obj({ Title: PDFHexString.fromText(title), Parent: outlinesRef, Dest: [pages[i * 2].ref, PDFName.of('Fit')] });
+    if (i > 0) item.set(PDFName.of('Prev'), refs[i - 1]);
+    if (i < refs.length - 1) item.set(PDFName.of('Next'), refs[i + 1]);
+    ctx.assign(refs[i], item);
+  });
+  ctx.assign(outlinesRef, ctx.obj({ Type: 'Outlines', First: refs[0], Last: refs[refs.length - 1], Count: PDFNumber.of(titles.length) }));
+  doc.catalog.set(PDFName.of('Outlines'), outlinesRef);
+
+  const font = await doc.embedFont(StandardFonts.Helvetica);
+  const first = pages[0];
+  first.drawText('Aller au chapitre trois', { x: 56, y: 120, size: 14, font, color: rgb(0.12, 0.3, 0.47) });
+  first.drawText('Site externe', { x: 300, y: 120, size: 14, font, color: rgb(0.12, 0.3, 0.47) });
+  const internal = ctx.register(ctx.obj({ Type: 'Annot', Subtype: 'Link', Rect: [50, 110, 230, 140], Border: [0, 0, 0], Dest: [pages[4].ref, PDFName.of('Fit')] }));
+  const external = ctx.register(
+    ctx.obj({ Type: 'Annot', Subtype: 'Link', Rect: [295, 110, 400, 140], Border: [0, 0, 0], A: { Type: 'Action', S: 'URI', URI: PDFString.of('https://example.org/') } }),
+  );
+  first.node.set(PDFName.of('Annots'), ctx.obj([internal, external]));
   return doc.save({ useObjectStreams: false });
 }
 
@@ -96,6 +126,7 @@ const files = {
   'sample-3p.pdf': sample,
   'sample-12p.pdf': await textPdf(12, 'Recueil', { landscape: true }),
   'rotated.pdf': await textPdf(2, 'Pivoté', { rotateSecond: true }),
+  'outline.pdf': await outlinePdf(),
   'scan.pdf': await imagePdf(scanJpg, 595, 842),
   'heavy-image.pdf': await imagePdf(bigJpg, 595, 446),
   'protected.pdf': await protect(sample),

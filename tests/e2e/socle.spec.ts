@@ -1,5 +1,4 @@
-import { expect, test } from '@playwright/test';
-import { isMobile, open } from './helpers';
+import { expect, isMobile, open, test } from './helpers';
 
 test.describe('socle', () => {
   test('s’ouvre en français, même avec un navigateur en anglais', async ({ browser }) => {

@@ -18,6 +18,8 @@ export default defineConfig({
     trace: 'off',
     locale: 'fr-FR',
     serviceWorkers: 'block',
+    // Animations coupées : les contrôles de contraste ne tombent pas sur un fondu en cours.
+    contextOptions: { reducedMotion: 'reduce' },
   },
   projects: [
     { name: 'bureau', use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 } } },

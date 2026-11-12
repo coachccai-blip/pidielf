@@ -19,7 +19,7 @@ export function ToolCard({ tool, fileIds, compact }: { tool: ToolMeta; fileIds?:
       </span>
       <span className="min-w-0">
         <span className="block leading-tight font-bold">{t(`tools.${tool.id}.name`)}</span>
-        {!compact && <span className="mt-0.5 block text-[0.82rem] leading-snug opacity-90">{t(`tools.${tool.id}.desc`)}</span>}
+        {!compact && <span className="mt-0.5 block text-[0.82rem] leading-snug">{t(`tools.${tool.id}.desc`)}</span>}
       </span>
     </a>
   );

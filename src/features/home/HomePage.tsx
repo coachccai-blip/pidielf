@@ -131,7 +131,7 @@ function ContinueCard({ file }: { file: FileRecord }) {
       <Cover file={file} className="h-28 w-20 shrink-0" />
       <span className="flex min-w-0 flex-1 flex-col">
         <span className="line-clamp-2 leading-tight font-bold">{file.name.replace(/\.pdf$/i, '')}</span>
-        <span className="mt-1 text-sm opacity-90">
+        <span className="mt-1 text-sm">
           {t('home.pageOf', { page: file.page ?? 1, total: file.pageCount })}
         </span>
         <span className="mt-auto">

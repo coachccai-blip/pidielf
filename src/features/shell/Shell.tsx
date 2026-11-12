@@ -205,7 +205,7 @@ export function Page({
           )}
           <div className="min-w-0 flex-1">
             <h1 className={cn('truncate text-[1.9rem] md:text-4xl', cat && 'text-cat-ink')}>{title}</h1>
-            {subtitle && <p className={cn('mt-0.5 text-sm md:text-base', cat ? 'text-cat-ink/90' : 'text-ink-soft')}>{subtitle}</p>}
+            {subtitle && <p className={cn('mt-0.5 text-sm md:text-base', cat ? 'text-cat-ink' : 'text-ink-soft')}>{subtitle}</p>}
           </div>
           {actions && <div className="flex shrink-0 items-center gap-1.5">{actions}</div>}
         </div>

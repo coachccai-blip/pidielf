@@ -458,7 +458,7 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
             {mode === 'page' && (
               <div className="hidden items-center md:flex">
                 <IconButton size="sm" label={t('reader.zoomOut')} onClick={() => pageMode.current?.zoomBy(1 / 1.2)}><ZoomOut /></IconButton>
-                <button type="button" onClick={() => pageMode.current?.resetZoom()} aria-label={t('reader.zoomReset')} title={t('reader.zoomReset')} className="min-h-9 min-w-14 rounded-md px-1 text-sm font-bold tabular-nums hover:bg-surface-2">
+                <button type="button" onClick={() => pageMode.current?.resetZoom()} aria-label={`${formatPercent(zoom)} — ${t('reader.zoomReset')}`} title={t('reader.zoomReset')} className="min-h-9 min-w-14 rounded-md px-1 text-sm font-bold tabular-nums hover:bg-surface-2">
                   {formatPercent(zoom)}
                 </button>
                 <IconButton size="sm" label={t('reader.zoomIn')} onClick={() => pageMode.current?.zoomBy(1.2)}><ZoomIn /></IconButton>

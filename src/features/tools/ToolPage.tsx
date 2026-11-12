@@ -78,16 +78,20 @@ export default function ToolPage({ toolId, fileIds }: { toolId: string; fileIds:
   const addLibrary = (ids: string[]) => guard(() => prepareLibraryFiles(ids, tool!));
 
   // Fichiers transmis par l'URL (bibliothèque, lecteur) ou par un autre écran.
+  const initialised = useRef(false);
   useEffect(() => {
-    if (!tool) return;
+    // Une seule fois, même si l'effet est rejoué (mode strict de React en développement).
+    if (!tool || initialised.current) return;
+    initialised.current = true;
     const handed = takeInputs();
     const files = takeFiles();
     if (handed.length) accept(handed);
     else if (files.length) void addFiles(files);
     else if (fileIds.length) void addLibrary(fileIds);
-    return () => abort.current?.abort();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  // Quitter l'écran interrompt le traitement en cours.
+  useEffect(() => () => abort.current?.abort(), []);
 
   const Tool = useMemo(() => (tool ? componentFor(tool) : null), [tool]);
 

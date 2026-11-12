@@ -2,6 +2,8 @@ import { defineConfig, devices } from '@playwright/test';
 
 const base = process.env.BASE_PATH ?? '/pidielf/';
 const port = 4173;
+// PIDIELF_URL permet de viser un serveur déjà lancé (développement).
+const external = process.env.PIDIELF_URL;
 
 // Tests de parcours sur la version construite, en mobile et sur bureau.
 export default defineConfig({
@@ -12,7 +14,7 @@ export default defineConfig({
   reporter: process.env.CI ? 'github' : 'list',
   timeout: 60_000,
   use: {
-    baseURL: `http://localhost:${port}${base}`,
+    baseURL: external ?? `http://localhost:${port}${base}`,
     trace: 'off',
     locale: 'fr-FR',
     serviceWorkers: 'block',
@@ -21,9 +23,11 @@ export default defineConfig({
     { name: 'bureau', use: { ...devices['Desktop Chrome'], viewport: { width: 1280, height: 800 } } },
     { name: 'mobile', use: { ...devices['Pixel 7'] } },
   ],
-  webServer: {
-    command: `npx vite preview --port ${port} --strictPort`,
-    url: `http://localhost:${port}${base}`,
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: external
+    ? undefined
+    : {
+        command: `npx vite preview --port ${port} --strictPort`,
+        url: `http://localhost:${port}${base}`,
+        reuseExistingServer: !process.env.CI,
+      },
 });

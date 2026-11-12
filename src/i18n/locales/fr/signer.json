@@ -1,0 +1,67 @@
+{
+  "suffix": "signe",
+  "notice": "Signature visuelle : elle n'a pas la valeur d'une signature électronique certifiée.",
+  "add": {
+    "signature": "Signature",
+    "initials": "Initiales",
+    "date": "Date",
+    "text": "Texte"
+  },
+  "saved": "Enregistrées sur cet appareil",
+  "place": "Poser : {{name}}",
+  "deleteSaved": "Supprimer : {{name}}",
+  "kind": {
+    "signature": "Signature",
+    "initials": "Initiales"
+  },
+  "kindShort": {
+    "signature": "Signature",
+    "initials": "Initiales"
+  },
+  "new": {
+    "signature": "Nouvelle signature",
+    "initials": "Nouvelles initiales"
+  },
+  "method": {
+    "draw": "Dessiner au doigt ou à la souris",
+    "type": "Taper au clavier",
+    "import": "Importer une image"
+  },
+  "remember": "Mémoriser sur cet appareil",
+  "saveFailed": "La signature n'a pas pu être mémorisée. Elle est tout de même posée sur la page.",
+  "deleteTitle": "Supprimer cette signature ?",
+  "deleteText": "« {{name}} » sera retirée de cet appareil. Les pages déjà signées ne changent pas.",
+  "ink": "Encre",
+  "pad": {
+    "rotate": "Tournez le téléphone pour signer plus à l'aise.",
+    "area": "Zone de dessin de la signature",
+    "here": "Signez ici",
+    "undo": "Annuler le trait",
+    "clear": "Effacer"
+  },
+  "typed": {
+    "nameLabel": "Votre nom",
+    "initialsLabel": "Vos initiales",
+    "sample": "Aperçu",
+    "weight": "Épaisseur de l'écriture",
+    "regular": "Fine",
+    "bold": "Appuyée"
+  },
+  "import": {
+    "unreadable": "Cette image ne peut pas être lue. Choisissez un fichier PNG ou JPEG.",
+    "preview": "Aperçu de la signature importée",
+    "blank": "Il ne reste rien de visible. Désactivez le fond transparent, ou choisissez une image plus contrastée.",
+    "transparent": "Rendre le fond blanc transparent",
+    "transparentHint": "Pour la photo d'une signature sur papier : seul le trait est conservé."
+  },
+  "helpTitle": "Comment faire",
+  "help": {
+    "place": "Touchez « Signature » : elle se pose au milieu de la page affichée, puis se déplace du doigt.",
+    "resize": "Pincez à deux doigts pour l'agrandir ou la réduire ; à la souris, tirez un coin.",
+    "saved": "Les signatures mémorisées restent sur cet appareil et se reposent en un appui."
+  },
+  "action": "Signer",
+  "empty": "Posez au moins une signature, des initiales, une date ou un texte.",
+  "summary_one": "{{count}} élément sera posé sur le PDF.",
+  "summary_other": "{{count}} éléments seront posés sur le PDF."
+}

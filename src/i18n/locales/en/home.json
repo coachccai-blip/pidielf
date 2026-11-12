@@ -1,0 +1,14 @@
+{
+  "title": "Read, organise and transform your PDFs",
+  "subtitle": "A comfortable reader, a library and fifteen tools. Free, no account.",
+  "import": "Import a file",
+  "importHint": "or drop it anywhere in the window",
+  "dropHere": "Drop your files here",
+  "continue": "Continue reading",
+  "recent": "Recent files",
+  "seeAll": "See all",
+  "tools": "Toolbox",
+  "pageOf": "Page {{page}} of {{total}}",
+  "emptyTitle": "Your library is still empty",
+  "emptyText": "Import a first PDF: it will stay here, even offline."
+}

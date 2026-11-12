@@ -1,0 +1,47 @@
+{
+  "suffix": "protected",
+  "action": "Protect",
+  "passwordTitle": "Password to open",
+  "password": "Password",
+  "confirmation": "Confirm password",
+  "mismatch": "The two entries do not match.",
+  "keepSafe": "Keep it somewhere safe: PidiElf does not store it anywhere and cannot remind you of it.",
+  "strengthLabel": "Strength:",
+  "strengthEmpty": "Password strength will show here.",
+  "strength": {
+    "veryWeak": "very weak",
+    "weak": "weak",
+    "fair": "fair",
+    "good": "good",
+    "strong": "excellent"
+  },
+  "advice": {
+    "common": "too common, it would be guessed at once",
+    "short": "make it longer: a phrase of a few words works wonders",
+    "pattern": "avoid sequences, repeats and dates",
+    "variety": "mix letters, digits and symbols"
+  },
+  "permissionsTitle": "Permissions",
+  "allow": {
+    "print": "Allow printing",
+    "copy": "Allow copying text and images",
+    "modify": "Allow editing"
+  },
+  "honest": "Only the password to open is enforced by encryption. Restrictions are honoured by well-behaved PDF readers, but they are not strong protection: anyone who can open the file can get around them with other software.",
+  "advanced": "Advanced options",
+  "owner": "Owner password (optional)",
+  "ownerHint": "It lets you change or lift the restrictions later. It must differ from the password to open.",
+  "ownerRandom": "If left empty, PidiElf draws a random one that it neither shows nor keeps: the restrictions can then no longer be lifted that way. The password to open will still open the file.",
+  "ownerSame": "The owner password must differ from the password to open: otherwise opening the file would grant every right.",
+  "needPassword": "Enter a password to open the file.",
+  "needConfirmation": "Confirm the password by typing it a second time.",
+  "summary": "The file will be encrypted with 256-bit AES.",
+  "note": "256-bit AES encryption. Keep the password safe: without it the file can no longer be opened, and nobody can recover it for you.",
+  "previewTitle": "What the protection will do",
+  "previewOpen": "The password will be asked every time the file is opened. Content encrypted with 256-bit AES.",
+  "preview": {
+    "print": { "on": "Printing allowed", "off": "Printing not allowed" },
+    "copy": { "on": "Copying text and images allowed", "off": "Copying text and images not allowed" },
+    "modify": { "on": "Editing allowed", "off": "Editing not allowed" }
+  }
+}

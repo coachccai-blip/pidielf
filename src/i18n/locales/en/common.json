@@ -1,0 +1,21 @@
+{
+  "close": "Close",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "delete": "Delete",
+  "create": "Create",
+  "done": "Done",
+  "open": "Open",
+  "back": "Back",
+  "loading": "Loading…",
+  "working": "Working…",
+  "learnMore": "Learn more",
+  "showPassword": "Show password",
+  "hidePassword": "Hide password",
+  "promise": "Everything happens in your browser: your files never leave this device.",
+  "promiseShort": "Your files stay on this device.",
+  "pages_one": "{{count}} page",
+  "pages_other": "{{count}} pages",
+  "minutes_one": "{{count}} min",
+  "minutes_other": "{{count}} min"
+}

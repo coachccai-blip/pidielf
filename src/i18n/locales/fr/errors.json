@@ -1,0 +1,32 @@
+{
+  "generic": "Quelque chose n'a pas fonctionné. Réessayez.",
+  "heavy": "Ce fichier est volumineux : le traitement peut être lent ou échouer sur cet appareil.",
+  "encrypted": {
+    "title": "Ce fichier est protégé par un mot de passe.",
+    "action": "Déverrouillez-le d'abord avec l'outil « Déverrouiller », puis recommencez."
+  },
+  "bad-password": {
+    "title": "Le mot de passe n'est pas le bon.",
+    "action": "Vérifiez la saisie (majuscules, espaces) et réessayez."
+  },
+  "damaged": {
+    "title": "Ce fichier semble abîmé ou n'est pas un PDF valide.",
+    "action": "Essayez de le télécharger à nouveau, ou de l'ouvrir puis de le réenregistrer depuis une autre application."
+  },
+  "memory": {
+    "title": "La mémoire de l'appareil ne suffit pas pour ce fichier.",
+    "action": "Fermez d'autres onglets, traitez moins de pages à la fois, ou essayez sur un ordinateur."
+  },
+  "empty": {
+    "title": "Il n'y a rien à produire avec ces réglages.",
+    "action": "Vérifiez la sélection de pages ou de fichiers."
+  },
+  "unsupported": {
+    "title": "Ce navigateur ne propose pas cette fonction.",
+    "action": "Essayez avec une version récente de Chrome, Edge, Firefox ou Safari."
+  },
+  "unknown": {
+    "title": "Le traitement a échoué.",
+    "action": "Réessayez. Si le problème persiste, le fichier utilise peut-être une fonction PDF non prise en charge."
+  }
+}

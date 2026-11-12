@@ -1,0 +1,33 @@
+{
+  "suffix": "compressed",
+  "action": "Compress",
+  "level": "Compression level",
+  "levels": {
+    "light": {
+      "name": "Light",
+      "desc": "Images almost untouched. For printing or archiving."
+    },
+    "balanced": {
+      "name": "Recommended",
+      "desc": "Images stay sharp on screen, file clearly lighter."
+    },
+    "strong": {
+      "name": "Strong",
+      "desc": "The lightest file. Images lose some detail."
+    }
+  },
+  "hint": "Only images are made lighter: text stays sharp and selectable. The gain is large on scans and photos, small on a PDF that is mostly text, and more modest than with an online service. The real sizes, before and after, are shown at the end.",
+  "files": "Files to compress",
+  "current": "Current size: {{size}}.",
+  "currentBatch_one": "{{count}} file · {{size}}.",
+  "currentBatch_other": "{{count}} files · {{size}} in total.",
+  "noteImages_one": "{{count}} image made lighter out of {{total}}. Text is still selectable text.",
+  "noteImages_other": "{{count}} images made lighter out of {{total}}. Text is still selectable text.",
+  "noteStructure": "The images in this PDF were already well compressed: only the file structure was compacted.",
+  "noteNoImages": "This PDF contains no images: only its structure could be compacted, so the gain stays modest.",
+  "noteSameNoImages": "This PDF contains no images and its structure is already compact. It is returned as is.",
+  "noteSameImages": "The images in this PDF are already well compressed, or in a format PidiElf prefers not to touch. The file is returned as is.",
+  "noteNoCodec": "This browser cannot recompress images: only the file structure was optimised. A recent browser will give a better result.",
+  "noteBatch": "Files made lighter: {{done}} of {{total}}.",
+  "noteBatchSame": "Files that were already optimised are returned as is."
+}

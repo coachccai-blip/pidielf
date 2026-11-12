@@ -1,0 +1,11 @@
+{
+  "suffix": "pivote",
+  "hint": "Touchez une page pour l'ajouter à la sélection ou l'en retirer.",
+  "hintBatch": "La même rotation sera appliquée à tous les fichiers.",
+  "angle": "Rotation",
+  "left": "Gauche",
+  "right": "Droite",
+  "action": "Pivoter",
+  "summary_one": "{{count}} page sera pivotée.",
+  "summary_other": "{{count}} pages seront pivotées."
+}

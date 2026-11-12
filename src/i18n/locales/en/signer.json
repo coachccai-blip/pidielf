@@ -1,0 +1,67 @@
+{
+  "suffix": "signed",
+  "notice": "Visual signature: it does not have the value of a certified electronic signature.",
+  "add": {
+    "signature": "Signature",
+    "initials": "Initials",
+    "date": "Date",
+    "text": "Text"
+  },
+  "saved": "Saved on this device",
+  "place": "Place: {{name}}",
+  "deleteSaved": "Delete: {{name}}",
+  "kind": {
+    "signature": "Signature",
+    "initials": "Initials"
+  },
+  "kindShort": {
+    "signature": "Signature",
+    "initials": "Initials"
+  },
+  "new": {
+    "signature": "New signature",
+    "initials": "New initials"
+  },
+  "method": {
+    "draw": "Draw with a finger or the mouse",
+    "type": "Type with the keyboard",
+    "import": "Import an image"
+  },
+  "remember": "Remember on this device",
+  "saveFailed": "The signature could not be saved. It has still been placed on the page.",
+  "deleteTitle": "Delete this signature?",
+  "deleteText": "“{{name}}” will be removed from this device. Pages already signed do not change.",
+  "ink": "Ink",
+  "pad": {
+    "rotate": "Turn the phone sideways to sign more comfortably.",
+    "area": "Signature drawing area",
+    "here": "Sign here",
+    "undo": "Undo stroke",
+    "clear": "Clear"
+  },
+  "typed": {
+    "nameLabel": "Your name",
+    "initialsLabel": "Your initials",
+    "sample": "Preview",
+    "weight": "Handwriting weight",
+    "regular": "Light",
+    "bold": "Heavy"
+  },
+  "import": {
+    "unreadable": "This image cannot be read. Choose a PNG or JPEG file.",
+    "preview": "Preview of the imported signature",
+    "blank": "Nothing visible is left. Turn off the transparent background, or choose an image with more contrast.",
+    "transparent": "Make the white background transparent",
+    "transparentHint": "For a photo of a signature on paper: only the stroke is kept."
+  },
+  "helpTitle": "How it works",
+  "help": {
+    "place": "Tap “Signature”: it lands in the middle of the page on screen, then moves with your finger.",
+    "resize": "Pinch with two fingers to make it bigger or smaller; with a mouse, drag a corner.",
+    "saved": "Saved signatures stay on this device and can be placed again in one tap."
+  },
+  "action": "Sign",
+  "empty": "Place at least a signature, initials, a date or a text.",
+  "summary_one": "{{count}} element will be placed on the PDF.",
+  "summary_other": "{{count}} elements will be placed on the PDF."
+}

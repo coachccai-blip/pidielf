@@ -1,0 +1,32 @@
+{
+  "generic": "Something went wrong. Please try again.",
+  "heavy": "This file is large: processing may be slow or fail on this device.",
+  "encrypted": {
+    "title": "This file is password-protected.",
+    "action": "Unlock it first with the “Unlock” tool, then try again."
+  },
+  "bad-password": {
+    "title": "That password is not correct.",
+    "action": "Check your typing (capitals, spaces) and try again."
+  },
+  "damaged": {
+    "title": "This file looks damaged or is not a valid PDF.",
+    "action": "Try downloading it again, or open and re-save it from another application."
+  },
+  "memory": {
+    "title": "This device does not have enough memory for this file.",
+    "action": "Close other tabs, process fewer pages at once, or try on a computer."
+  },
+  "empty": {
+    "title": "There is nothing to produce with these settings.",
+    "action": "Check the page or file selection."
+  },
+  "unsupported": {
+    "title": "This browser does not offer this feature.",
+    "action": "Try a recent version of Chrome, Edge, Firefox or Safari."
+  },
+  "unknown": {
+    "title": "Processing failed.",
+    "action": "Try again. If the problem persists, the file may use a PDF feature that is not supported."
+  }
+}

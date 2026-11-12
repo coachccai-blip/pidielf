@@ -1,0 +1,38 @@
+{
+  "suffix": "edited",
+  "tools": "Editing tools",
+  "tool": {
+    "select": "Select",
+    "text": "Text",
+    "image": "Image",
+    "rect": "Rectangle",
+    "ellipse": "Ellipse",
+    "line": "Line",
+    "arrow": "Arrow",
+    "ink": "Free drawing",
+    "highlight": "Highlight",
+    "whiteout": "White cover",
+    "cover": "Cover then rewrite"
+  },
+  "hint": {
+    "select": "tap an element to move, resize or delete it.",
+    "text": "tap the page where you want to write.",
+    "image": "tap the page where you want to place the image.",
+    "rect": "drag on the page to draw the rectangle.",
+    "ellipse": "drag on the page to draw the ellipse.",
+    "line": "drag on the page to draw the line.",
+    "arrow": "drag from the start to the tip.",
+    "ink": "draw on the page, in one or several strokes.",
+    "highlight": "drag over the passage to highlight.",
+    "whiteout": "drag over the area to hide.",
+    "cover": "drag over the text to replace, then type the new one."
+  },
+  "imageUnsupported": "This image cannot be read. Try a PNG or JPEG file.",
+  "limitTitle": "The original text cannot be edited",
+  "limitText": "Text already in a PDF cannot be reliably changed in the browser. The tool therefore adds content on top.",
+  "limitCover": "To correct a passage, use “Cover then rewrite”: a white cover, then your new text.",
+  "action": "Apply",
+  "empty": "Add at least one element to a page.",
+  "summary_one": "{{count}} element will be added to the PDF.",
+  "summary_other": "{{count}} elements will be added to the PDF."
+}

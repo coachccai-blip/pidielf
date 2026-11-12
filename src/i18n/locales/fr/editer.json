@@ -1,0 +1,38 @@
+{
+  "suffix": "edite",
+  "tools": "Outils d'édition",
+  "tool": {
+    "select": "Sélectionner",
+    "text": "Texte",
+    "image": "Image",
+    "rect": "Rectangle",
+    "ellipse": "Ellipse",
+    "line": "Trait",
+    "arrow": "Flèche",
+    "ink": "Dessin libre",
+    "highlight": "Surligner",
+    "whiteout": "Cache blanc",
+    "cover": "Cacher puis réécrire"
+  },
+  "hint": {
+    "select": "touchez un élément pour le déplacer, le redimensionner ou le supprimer.",
+    "text": "touchez la page à l'endroit où écrire.",
+    "image": "touchez la page à l'endroit où poser l'image.",
+    "rect": "faites glisser sur la page pour tracer le rectangle.",
+    "ellipse": "faites glisser sur la page pour tracer l'ellipse.",
+    "line": "faites glisser sur la page pour tracer le trait.",
+    "arrow": "faites glisser du départ jusqu'à la pointe.",
+    "ink": "dessinez sur la page, en un ou plusieurs traits.",
+    "highlight": "faites glisser sur le passage à surligner.",
+    "whiteout": "faites glisser sur la zone à masquer.",
+    "cover": "faites glisser sur le texte à remplacer, puis tapez le nouveau."
+  },
+  "imageUnsupported": "Cette image ne peut pas être lue. Essayez un fichier PNG ou JPEG.",
+  "limitTitle": "Le texte d'origine ne se modifie pas",
+  "limitText": "Le texte déjà présent dans un PDF ne se modifie pas de façon fiable dans le navigateur. L'outil ajoute donc du contenu par-dessus.",
+  "limitCover": "Pour corriger un passage, utilisez « Cacher puis réécrire » : un cache blanc, puis votre nouveau texte.",
+  "action": "Appliquer",
+  "empty": "Ajoutez au moins un élément sur une page.",
+  "summary_one": "{{count}} élément sera ajouté au PDF.",
+  "summary_other": "{{count}} éléments seront ajoutés au PDF."
+}

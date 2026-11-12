@@ -1,0 +1,14 @@
+{
+  "title": "Lisez, rangez et transformez vos PDF",
+  "subtitle": "Un lecteur confortable, une bibliothèque et quinze outils. Gratuit, sans compte.",
+  "import": "Importer un fichier",
+  "importHint": "ou déposez-le n'importe où dans la fenêtre",
+  "dropHere": "Déposez vos fichiers ici",
+  "continue": "Reprendre la lecture",
+  "recent": "Fichiers récents",
+  "seeAll": "Tout voir",
+  "tools": "Boîte à outils",
+  "pageOf": "Page {{page}} sur {{total}}",
+  "emptyTitle": "Votre bibliothèque est encore vide",
+  "emptyText": "Importez un premier PDF : il restera rangé ici, même hors ligne."
+}

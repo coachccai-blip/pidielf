@@ -81,6 +81,7 @@
     "unsupported_other": "{{count}} files skipped: only PDFs and images are accepted.",
     "duplicateTitle": "This file is already in the library",
     "duplicateText": "A file named “{{name}}” with the same size already exists. Add it anyway?",
-    "duplicateAdd": "Add anyway"
+    "duplicateAdd": "Add anyway",
+    "scan": "Scan a document with the camera"
   }
 }

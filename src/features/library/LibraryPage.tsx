@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import {
-  Archive, BookOpen, CheckSquare, Combine, Copy, Download, FolderPlus, Info, LayoutGrid, List, MoreVertical,
+  Archive, BookOpen, Camera, CheckSquare, Combine, Copy, Download, FolderPlus, Info, LayoutGrid, List, MoreVertical,
   Pencil, Search, Share2, Square, Star, Trash2, Upload, X,
 } from 'lucide-react';
 import { db, type FileRecord, type ShelfRecord } from '@/db';
@@ -195,10 +195,20 @@ export default function LibraryPage() {
       title={t('library.title')}
       subtitle={files ? t('library.count', { count: files.length }) : undefined}
       actions={
-        <Button variant="primary" icon={<Upload />} onClick={importNow}>
-          <span className="hidden sm:inline">{t('library.import.button')}</span>
-          <span className="sm:hidden">{t('library.import.short')}</span>
-        </Button>
+        <>
+          <a
+            href={href(routes.tool('scanner'))}
+            aria-label={t('library.import.scan')}
+            title={t('library.import.scan')}
+            className="grid size-11 place-items-center rounded-md border border-line bg-surface-2 text-ink hover:bg-line"
+          >
+            <Camera className="size-5" aria-hidden="true" />
+          </a>
+          <Button variant="primary" icon={<Upload />} onClick={importNow}>
+            <span className="hidden sm:inline">{t('library.import.button')}</span>
+            <span className="sm:hidden">{t('library.import.short')}</span>
+          </Button>
+        </>
       }
     >
       {empty ? (

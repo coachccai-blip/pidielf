@@ -81,6 +81,7 @@
     "unsupported_other": "{{count}} fichiers ignorés : seuls les PDF et les images sont acceptés.",
     "duplicateTitle": "Ce fichier est déjà dans la bibliothèque",
     "duplicateText": "Un fichier nommé « {{name}} », de la même taille, existe déjà. L'ajouter quand même ?",
-    "duplicateAdd": "Ajouter quand même"
+    "duplicateAdd": "Ajouter quand même",
+    "scan": "Scanner un document avec l'appareil photo"
   }
 }

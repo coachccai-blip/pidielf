@@ -535,7 +535,8 @@ export const PageMode = forwardRef<PageModeHandle, Props>(function PageMode(
       ref={scroller}
       onScroll={onScroll}
       tabIndex={-1}
-      className={cn('scrollbar-thin absolute inset-0 overflow-auto overscroll-contain outline-none', tool === 'ink' && 'touch-pan-y')}
+      // Le zoom par pincement est géré ici : on ne laisse au navigateur que le défilement.
+      className={cn('scrollbar-thin absolute inset-0 touch-pan-x touch-pan-y overflow-auto overscroll-contain outline-none')}
     >
       <div ref={content} className="relative" style={{ width: contentWidth, height: contentHeight }}>
         {visible.map((index) => {

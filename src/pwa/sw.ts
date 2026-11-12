@@ -1,6 +1,7 @@
 /// <reference lib="webworker" />
 // Service worker : application disponible hors ligne, ressources lourdes mises
 // en cache au premier usage, réception des fichiers partagés (Android).
+import { clientsClaim } from 'workbox-core';
 import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
 import { CacheFirst } from 'workbox-strategies';
@@ -42,6 +43,8 @@ self.addEventListener('message', (event) => {
   if ((event.data as { type?: string } | undefined)?.type === 'SKIP_WAITING') void self.skipWaiting();
 });
 
+// Dès la première visite, l'application est servie depuis le cache : elle fonctionne hors ligne.
+clientsClaim();
 cleanupOutdatedCaches();
 precacheAndRoute(self.__WB_MANIFEST);
 

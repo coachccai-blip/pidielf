@@ -69,7 +69,8 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(functio
       className={cn(
         'inline-flex shrink-0 items-center justify-center rounded-md transition-colors duration-150 disabled:opacity-40',
         size === 'md' ? 'size-11 [&>svg]:size-5' : 'size-9 [&>svg]:size-[1.05rem]',
-        variant === 'ghost' && 'text-ink hover:bg-surface-2',
+        // Une couleur passée par className (text-danger…) prime sur la couleur par défaut.
+        variant === 'ghost' && cn('hover:bg-surface-2', !/(^|\s)text-/.test(className ?? '') && 'text-ink'),
         variant === 'soft' && 'border border-line bg-surface-2 text-ink hover:bg-line',
         variant === 'cat' && 'bg-cat text-cat-ink',
         active && 'bg-accent-soft text-accent',

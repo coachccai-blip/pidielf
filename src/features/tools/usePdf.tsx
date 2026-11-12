@@ -154,7 +154,7 @@ export function PageThumb({
         aria-hidden="true"
         className={cn('bg-white shadow-soft transition-[transform,opacity] duration-200', ready ? 'opacity-100' : 'opacity-0')}
         style={{
-          width: quarter ? `${ratio * 100}%` : '100%',
+          width: quarter ? `${100 / ratio}%` : '100%',
           transform: rotate ? `rotate(${rotate}deg)` : undefined,
         }}
       />

@@ -14,6 +14,8 @@ export const test = base.extend({
     await page.addInitScript(() => {
       delete (window as { showSaveFilePicker?: unknown }).showSaveFilePicker;
     });
+    // En développement, les rechargements à chaud de Vite ne doivent pas interrompre un parcours.
+    if (process.env.PIDIELF_URL) await page.routeWebSocket(/./, () => undefined);
     await use(page);
   },
 });

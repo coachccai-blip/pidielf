@@ -1,6 +1,6 @@
 // Fusionner : réunit plusieurs PDF en un seul, dans l'ordre choisi.
 import { useMemo, useState } from 'react';
-import { DndContext, KeyboardSensor, PointerSensor, TouchSensor, closestCenter, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core';
+import { DndContext, KeyboardSensor, PointerSensor, closestCenter, useSensor, useSensors, type DragEndEvent } from '@dnd-kit/core';
 import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { ArrowDown, ArrowUp, GripVertical, Plus, Trash2 } from 'lucide-react';
@@ -16,6 +16,10 @@ import { ToolLayout } from '../ToolLayout';
 import type { InputFile, ToolProps } from '../types';
 import { PageThumb, usePdf } from '../usePdf';
 
+// Options stables : elles ne relancent pas le rendu des lignes à chaque frappe.
+const POINTER = { activationConstraint: { distance: 6 } };
+const KEYBOARD = { coordinateGetter: sortableKeyboardCoordinates };
+
 const merge = pdfOp<typeof import('@/core/pdf/merge')>('merge');
 
 export default function Fusionner({ inputs, setInputs, addMore, run }: ToolProps) {
@@ -23,11 +27,8 @@ export default function Fusionner({ inputs, setInputs, addMore, run }: ToolProps
   // Pages à garder pour chaque fichier (saisie libre : « 1-3, 5 »). Vide = toutes.
   const [ranges, setRanges] = useState<Record<string, string>>({});
 
-  const sensors = useSensors(
-    useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
-    useSensor(TouchSensor, { activationConstraint: { delay: 160, tolerance: 8 } }),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
-  );
+  // La poignée ne laisse pas défiler la page (touch-none) : au doigt comme à la souris, on la fait glisser directement.
+  const sensors = useSensors(useSensor(PointerSensor, POINTER), useSensor(KeyboardSensor, KEYBOARD));
 
   const parsed = useMemo(
     () =>

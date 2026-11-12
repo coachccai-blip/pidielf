@@ -4,11 +4,32 @@ import AxeBuilder from '@axe-core/playwright';
 import type { Page } from '@playwright/test';
 import { chooseFiles, expect, importToLibrary, open, test } from './helpers';
 
-async function audit(page: Page, label: string): Promise<void> {
+async function violations(page: Page, label: string): Promise<string[]> {
   const results = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze();
-  const summary = results.violations.map((v) => `${v.id} (${v.impact}) : ${v.nodes.slice(0, 3).map((n) => n.target.join(' ')).join(' | ')}`);
-  expect(summary, `violations sur ${label}`).toEqual([]);
+  return results.violations.map((v) => `${label} — ${v.id} (${v.impact}) : ${v.nodes.slice(0, 3).map((n) => n.target.join(' ')).join(' | ')}`);
 }
+
+async function audit(page: Page, label: string): Promise<void> {
+  expect(await violations(page, label)).toEqual([]);
+}
+
+const TOOLS: Array<[string, string[]]> = [
+  ['fusionner', ['sample-3p.pdf', 'rotated.pdf']],
+  ['diviser', ['outline.pdf']],
+  ['organiser', ['sample-3p.pdf']],
+  ['pivoter', ['sample-3p.pdf']],
+  ['compresser', ['heavy-image.pdf']],
+  ['ocr', ['scan.pdf']],
+  ['pdf-en-images', ['sample-3p.pdf']],
+  ['images-en-pdf', ['photo.png', 'photo.jpg']],
+  ['scanner', ['scan.jpg']],
+  ['editer', ['sample-3p.pdf']],
+  ['filigrane', ['sample-3p.pdf']],
+  ['numeros', ['sample-3p.pdf']],
+  ['signer', ['sample-3p.pdf']],
+  ['proteger', ['sample-3p.pdf']],
+  ['deverrouiller', ['protected.pdf']],
+];
 
 for (const theme of ['light', 'dark'] as const) {
   test.describe(`accessibilité — thème ${theme === 'light' ? 'clair' : 'sombre'}`, () => {
@@ -40,6 +61,17 @@ for (const theme of ['light', 'dark'] as const) {
       await page.getByRole('button', { name: 'Pivoter', exact: true }).click();
       await expect(page.getByRole('heading', { name: 'Votre fichier est prêt' })).toBeVisible();
       await audit(page, 'outil — récupérer');
+    });
+
+    test('les quinze outils, à l’étape des réglages', async ({ page }) => {
+      test.setTimeout(240_000);
+      const found: string[] = [];
+      for (const [tool, files] of TOOLS) {
+        await chooseFiles(page, tool, ...files);
+        await page.waitForTimeout(700); // aperçus et miniatures
+        found.push(...(await violations(page, tool)));
+      }
+      expect(found).toEqual([]);
     });
 
     test('lecteur et ses panneaux', async ({ page }) => {

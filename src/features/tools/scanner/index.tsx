@@ -429,7 +429,7 @@ function Row({
             type="button"
             onClick={onSelect}
             aria-current={selected ? 'true' : undefined}
-            aria-label={t('scanner.showPage', { n })}
+            title={t('scanner.showPage', { n })}
             className="flex min-w-0 flex-1 items-center gap-2.5 rounded-md text-left"
           >
             <span className={cn('grid size-16 shrink-0 place-items-center rounded-md p-1', selected ? 'bg-cat' : 'bg-surface-2')}>

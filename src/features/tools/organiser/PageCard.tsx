@@ -67,7 +67,8 @@ export const PageCard = memo(function PageCard({
         type="button"
         {...grab}
         aria-pressed={selected}
-        aria-label={label}
+        // Le nom lu reprend aussi le texte visible de la carte, pour la commande vocale.
+        aria-label={`${label} — ${rotate !== 0 ? `${rotate}° ` : ''}${caption}`}
         onClick={() => onToggle(sheet.id)}
         className="relative block w-full touch-manipulation rounded-md select-none [-webkit-touch-callout:none]"
       >
@@ -93,9 +94,9 @@ export const PageCard = memo(function PageCard({
           {selected && <Check className="size-4" strokeWidth={3} />}
         </span>
         {rotate !== 0 && (
-          <span className="absolute top-1 right-1 rounded-full bg-surface px-1.5 text-xs font-bold text-ink shadow-soft tabular-nums" aria-hidden="true">{rotate}°</span>
+          <span className="absolute top-1 right-1 rounded-full bg-surface px-1.5 text-xs font-bold text-ink shadow-soft tabular-nums">{rotate}°</span>
         )}
-        <span className={cn('mt-0.5 block truncate text-center text-xs', !selected && 'text-ink-soft')} aria-hidden="true">{caption}</span>
+        <span className={cn('mt-0.5 block truncate text-center text-xs', !selected && 'text-ink-soft')}>{caption}</span>
       </button>
       <div className="flex items-center justify-between">
         <button

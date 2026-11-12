@@ -63,7 +63,7 @@ export default defineConfig({
       injectManifest: {
         globPatterns: ['**/*.{js,css,html,svg,png,woff2,wasm,mjs}'],
         // Les gros fichiers (modèles OCR, moteurs WebAssembly) sont mis en cache au premier usage.
-        globIgnores: ['vendor/tesseract/**', 'vendor/pdfjs/cmaps/**'],
+        globIgnores: ['vendor/tesseract/**', 'vendor/pdfjs/cmaps/**', '**/heic-to-*.js'],
         maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
       },
       devOptions: { enabled: false },

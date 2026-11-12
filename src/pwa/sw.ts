@@ -48,5 +48,8 @@ clientsClaim();
 cleanupOutdatedCaches();
 precacheAndRoute(self.__WB_MANIFEST);
 
-// Modèles OCR, tables de caractères, polices PDF : téléchargés au premier usage, puis gardés.
-registerRoute(({ url }) => url.origin === self.location.origin && url.pathname.includes('/vendor/'), new CacheFirst({ cacheName: 'pidielf-vendor' }));
+// Modèles OCR, tables de caractères, polices PDF, décodeur HEIC : téléchargés au premier usage, puis gardés.
+registerRoute(
+  ({ url }) => url.origin === self.location.origin && (url.pathname.includes('/vendor/') || url.pathname.includes('/assets/')),
+  new CacheFirst({ cacheName: 'pidielf-vendor' }),
+);

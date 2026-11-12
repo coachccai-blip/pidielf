@@ -5,7 +5,7 @@ import { SortableContext, arrayMove, rectSortingStrategy, sortableKeyboardCoordi
 import { CSS } from '@dnd-kit/utilities';
 import { ArrowLeft, ArrowRight, GripVertical, ImageOff, Plus, Trash2 } from 'lucide-react';
 import { suggestName } from '@/core/naming';
-import { layoutImage, type PageFormat, type PageMargin, type PageOrientation, type PageSetup } from '@/core/pdf/imagesToPdf';
+import { layoutImage, type PageFormat, type PageMargin, type PageOrientation, type PageSetup } from '@/core/pdf/imagesLayout';
 import { useT } from '@/i18n';
 import { prepareForPdf, releasePrepared, useLoadedImages, type Loaded, type PreparedImage } from '@/lib/images';
 import { useToolSettings } from '@/lib/settings';

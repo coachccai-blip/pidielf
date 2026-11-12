@@ -506,7 +506,7 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
         </div>
       </Drawer>
       <AnnotationDialog annotation={editingAnnotation} onClose={() => setEditing(null)} />
-      <ExportDialog open={exporting} onClose={() => setExporting(false)} file={file} blob={blob} annotations={annotations} />
+      <ExportDialog open={exporting} onClose={() => setExporting(false)} file={file} blob={blob} annotations={annotations} sizes={sizes} />
 
       <Menu
         open={menu === 'annotate'}

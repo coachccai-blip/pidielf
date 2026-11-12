@@ -15,7 +15,8 @@ import { toastError, toastSuccess } from '@/ui/toast';
 import { pdfOp } from '@/workers/client';
 import { canShareFiles, downloadBlob, shareFiles } from '@/features/export/actions';
 import { savePdfToLibrary } from '@/features/library/import';
-import { colorOf } from './PageView';
+import { colorOf, isVertical } from './PageView';
+import type { PageSize } from './useDocument';
 
 export const HIGHLIGHT_COLORS: HighlightColor[] = ['yellow', 'green', 'blue', 'pink'];
 
@@ -265,12 +266,19 @@ export function AnnotationDialog({ annotation, onClose }: { annotation: Annotati
 const exportColor: Record<string, string> = { yellow: '#ffdd57', green: '#8cde96', blue: '#8cc6ff', pink: '#ffa0c8' };
 
 /** Convertit les annotations du lecteur en éléments à intégrer au PDF. */
-export function annotationsToOverlays(annotations: AnnotationRecord[]): PageOverlays[] {
+export function annotationsToOverlays(annotations: AnnotationRecord[], sizes: PageSize[] = []): PageOverlays[] {
   const byPage = new Map<number, Overlay[]>();
   for (const a of annotations) {
     const list = byPage.get(a.page) ?? [];
     if (a.kind === 'highlight' && a.rects) list.push({ type: 'highlight', rects: a.rects, color: exportColor[a.color] ?? a.color });
-    if (a.kind === 'underline' && a.rects) list.push({ type: 'underline', rects: a.rects, color: colorOf(a.color) });
+    if (a.kind === 'underline' && a.rects) {
+      const size = sizes[a.page - 1];
+      const vertical = size ? a.rects.filter((r) => isVertical(r, size)) : [];
+      const horizontal = a.rects.filter((r) => !vertical.includes(r));
+      if (horizontal.length) list.push({ type: 'underline', rects: horizontal, color: colorOf(a.color) });
+      // Texte vertical : le trait longe le côté gauche, comme à l'écran.
+      for (const r of vertical) list.push({ type: 'line', x1: r.x, y1: r.y, x2: r.x, y2: r.y + r.h, stroke: colorOf(a.color), strokeWidth: 1.2 });
+    }
     if (a.kind === 'ink' && a.strokes) list.push({ type: 'ink', strokes: a.strokes, color: colorOf(a.color), width: a.width ?? 2 });
     if (a.text) {
       const at = a.kind === 'note' ? { x: a.x ?? 0, y: a.y ?? 0 } : a.rects?.[0] ? { x: a.rects[0].x + a.rects[0].w, y: a.rects[0].y } : null;
@@ -306,12 +314,14 @@ export function ExportDialog({
   file,
   blob,
   annotations,
+  sizes,
 }: {
   open: boolean;
   onClose: () => void;
   file: FileRecord;
   blob: Blob;
   annotations: AnnotationRecord[];
+  sizes: PageSize[];
 }) {
   const t = useT();
   const [busy, setBusy] = useState(false);
@@ -331,7 +341,7 @@ export function ExportDialog({
   };
 
   const annotated = async (): Promise<{ name: string; blob: Blob }> => {
-    const bytes = await overlays('applyOverlays', { bytes: new Uint8Array(await blob.arrayBuffer()), pages: annotationsToOverlays(annotations) });
+    const bytes = await overlays('applyOverlays', { bytes: new Uint8Array(await blob.arrayBuffer()), pages: annotationsToOverlays(annotations, sizes) });
     return { name: suggestName(file.name, t('reader.export.suffix')), blob: new Blob([bytes as BlobPart], { type: 'application/pdf' }) };
   };
 

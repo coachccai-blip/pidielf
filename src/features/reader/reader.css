@@ -77,6 +77,7 @@
 .reader .hl-pink { background: rgb(255 160 200 / 0.55); }
 .reader[data-paper='night'] .hl { opacity: 0.45; }
 .reader .ul { position: absolute; pointer-events: none; border-bottom: 2px solid currentColor; }
+.reader .ul.ul-v { border-bottom: 0; border-left: 2px solid currentColor; }
 .reader .search-hit { position: absolute; border-radius: 2px; background: rgb(255 170 60 / 0.4); pointer-events: none; mix-blend-mode: var(--hl-blend); }
 .reader .search-hit.current { background: rgb(255 120 30 / 0.65); outline: 2px solid rgb(230 100 20 / 0.9); }
 

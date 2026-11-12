@@ -35,6 +35,9 @@ export const inkPath = (stroke: number[][], w: number, h: number): string => {
   return `${d}L${last[0].toFixed(2)} ${last[1].toFixed(2)}`;
 };
 
+/** Texte écrit de haut en bas (page dont le contenu est couché) : le trait de soulignement longe le côté. */
+export const isVertical = (r: NRect, size: PageSize): boolean => r.h * size.height > r.w * size.width * 2.5;
+
 export const inkColors: Record<string, string> = {
   yellow: '#e0a800',
   green: '#2f8f46',
@@ -198,7 +201,7 @@ export const PageView = memo(function PageView({
             a.kind === 'highlight'
               ? a.rects?.map((r, i) => <div key={`${a.id}-${i}`} className={cn('hl', `hl-${a.color}`)} style={pct(r)} />)
               : a.kind === 'underline'
-                ? a.rects?.map((r, i) => <div key={`${a.id}-${i}`} className="ul" style={{ ...pct(r), color: colorOf(a.color) }} />)
+                ? a.rects?.map((r, i) => <div key={`${a.id}-${i}`} className={cn('ul', isVertical(r, size) && 'ul-v')} style={{ ...pct(r), color: colorOf(a.color) }} />)
                 : null,
           )}
           {hits.map((rects, i) =>

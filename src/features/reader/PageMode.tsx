@@ -213,6 +213,9 @@ export const PageMode = forwardRef<PageModeHandle, Props>(function PageMode(
       ready.current = true;
       const row = layout.rows[layout.rowOf[Math.min(sizes.length, Math.max(1, initialPage)) - 1] ?? 0];
       if (!paged && row) el.scrollTop = row.top - pad;
+      // L'ancre est posée tout de suite : les tailles réelles des pages arrivent ensuite,
+      // et la mise en page doit alors rester calée sur cette page.
+      anchor.current = captureAnchor();
       return;
     }
     const a = anchor.current;
@@ -269,6 +272,7 @@ export const PageMode = forwardRef<PageModeHandle, Props>(function PageMode(
       } else {
         const row = l.rows[l.rowOf[target - 1] ?? 0];
         el.scrollTop = row.top - pad;
+        anchor.current = captureAnchor();
       }
       if (target !== currentRef.current) {
         setCurrent(target);

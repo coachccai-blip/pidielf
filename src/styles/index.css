@@ -163,12 +163,14 @@
   input[type='checkbox'], input[type='radio'] { accent-color: var(--c-accent); width: 1.15rem; height: 1.15rem; }
 }
 
-/* Mouvement réduit : on coupe toutes les animations. */
+/* Mouvement réduit : on coupe toutes les animations. Les transitions sont supprimées
+   (durée nulle) plutôt que raccourcies : même très brève, une transition retarde
+   l'application des styles et fausse les mesures de mise en page. */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 0s !important;
     scroll-behavior: auto !important;
   }
 }

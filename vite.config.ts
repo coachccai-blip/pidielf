@@ -24,7 +24,7 @@ export default defineConfig({
       // L'enregistrement et les mises à jour automatiques sont gérés par src/pwa/register.ts.
       registerType: 'autoUpdate',
       injectRegister: false,
-      includeAssets: ['icons/*.png', 'icons/*.svg'],
+      includeAssets: ['icons/*.png'],
       manifest: {
         id: base,
         name: 'PidiElf',
@@ -40,9 +40,9 @@ export default defineConfig({
         theme_color: '#FAF8F3',
         categories: ['productivity', 'utilities', 'books'],
         icons: [
-          { src: 'icons/icon-192.png', sizes: '192x192', type: 'image/png' },
-          { src: 'icons/icon-512.png', sizes: '512x512', type: 'image/png' },
-          { src: 'icons/icon-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+          { src: 'icons/logo-192.png', sizes: '192x192', type: 'image/png' },
+          { src: 'icons/logo-512.png', sizes: '512x512', type: 'image/png' },
+          { src: 'icons/logo-maskable-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
         shortcuts: [
           { name: 'Bibliothèque', url: `${base}#/bibliotheque` },

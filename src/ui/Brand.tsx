@@ -1,28 +1,16 @@
-// Logo, mascotte et motifs maison. Univers original : aucune œuvre sous licence.
+// Logo, mascotte et motifs maison.
+import logoUrl from '@/assets/logo.webp';
 import { cn } from './cn';
 
-/** Logo : une feuille dont la nervure dessine le coin replié d'une page. */
+/** Logo de l'application (décoratif : le nom « PidiElf » l'accompagne ou le remplace pour les lecteurs d'écran). */
 export function Logo({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 64 64" fill="none" className={className} aria-hidden="true">
-      <path
-        d="M32 5C46 11 54 24 52 38c-1.6 11-9.5 18-20 21C21.5 56 13.6 49 12 38 10 24 18 11 32 5Z"
-        fill="var(--cat-organiser-bg)"
-        stroke="var(--cat-organiser-fg)"
-        strokeWidth="2.6"
-        strokeLinejoin="round"
-      />
-      <path d="M32 30h11V19Z" fill="var(--cat-lire-bg)" />
-      <path d="M32 59V30l11-11M32 30h11V19" stroke="var(--cat-organiser-fg)" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M32 40l-8-7M32 48l-9-8M32 44l8-6" stroke="var(--cat-organiser-fg)" strokeWidth="2" strokeLinecap="round" opacity=".55" />
-    </svg>
-  );
+  return <img src={logoUrl} alt="" width={144} height={144} decoding="async" draggable={false} className={cn('select-none', className)} />;
 }
 
 export function Wordmark({ className }: { className?: string }) {
   return (
     <span className={cn('inline-flex items-center gap-2', className)}>
-      <Logo className="size-8" />
+      <Logo className="size-10" />
       <span className="font-display text-[1.7rem] leading-none font-semibold tracking-tight">
         Pidi<span className="text-accent">Elf</span>
       </span>

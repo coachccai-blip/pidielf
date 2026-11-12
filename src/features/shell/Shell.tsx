@@ -39,7 +39,7 @@ export function Shell({ children, bare }: { children: ReactNode; bare?: boolean 
           )}
         >
           <a href={href(routes.home)} className={cn('mb-6 flex items-center rounded-md', collapsed ? 'justify-center' : 'px-2')} aria-label="PidiElf">
-            {collapsed ? <Logo className="size-9" /> : <Wordmark />}
+            {collapsed ? <Logo className="size-11" /> : <Wordmark />}
           </a>
           <nav aria-label={t('nav.main')} className="flex flex-1 flex-col gap-1">
             {entries.map((e) => {

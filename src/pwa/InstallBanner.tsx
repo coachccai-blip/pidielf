@@ -19,7 +19,7 @@ export function InstallBanner() {
       aria-label={t('pwa.installTitle')}
       className="fixed inset-x-3 bottom-[calc(5.25rem+var(--safe-bottom))] z-30 mx-auto flex max-w-md animate-rise items-center gap-3 rounded-xl border border-line bg-surface p-3 shadow-lift md:right-6 md:bottom-6 md:left-auto md:mx-0"
     >
-      <Logo className="size-10 shrink-0" />
+      <Logo className="size-12 shrink-0" />
       <div className="min-w-0 flex-1">
         <p className="leading-tight font-bold">{t('pwa.installTitle')}</p>
         <p className="text-sm text-ink-soft">{t('pwa.installText')}</p>

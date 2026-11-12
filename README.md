@@ -1,3 +1,5 @@
+<p align="center"><img src="docs/logo.png" alt="Logo de PidiElf" width="128" height="128" /></p>
+
 # PidiElf
 
 **Lecteur PDF confortable, bibliothèque locale et boîte à outils PDF — tout dans votre navigateur.**
@@ -69,7 +71,7 @@ L'application est servie sur `http://localhost:5173/pidielf/`.
 | `npm run test:e2e` | Tests de parcours sur mobile et bureau (Playwright, sur la version construite) |
 | `npm run fixtures` | Régénère les fichiers d'exemple de `tests/fixtures` |
 | `node scripts/screenshots.mjs` | Régénère les captures d'écran de ce README (version construite servie sur le port 4173) |
-| `node scripts/make-icons.mjs` | Régénère les icônes de l'application à partir du logo |
+| `node scripts/make-icons.mjs` | Régénère toutes les icônes (PWA, favicon, interface, README) à partir de `logo_pidielf.png` |
 
 Les scripts `predev` et `prebuild` copient dans `public/vendor` les ressources que l'application
 sert elle-même (données pdf.js, moteur et modèles Tesseract).

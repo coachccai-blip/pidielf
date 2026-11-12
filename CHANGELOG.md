@@ -41,3 +41,4 @@ Toutes les évolutions notables de PidiElf sont consignées ici, phase par phase
 - Lecteur : surligneur libre aux couleurs pastel (trait redressé quand il suit une ligne), à côté du dessin.
 - Lecteur : historique des annotations — Ctrl+Z annule, Ctrl+Y ou Ctrl+Maj+Z rétablit (ajout, suppression, couleur, note) ; boutons Annuler et Rétablir dans la barre d'annotation et le menu Annoter.
 - Mises à jour automatiques : une nouvelle version s'installe et s'applique seule, y compris sur une application déjà installée ; pendant un travail dans un outil, elle attend qu'on en sorte. Recherche d'une nouvelle version au retour dans l'application et toutes les heures.
+- Nouveau logo (`logo_pidielf.png`) : icônes de l'application installée, icône masquable, icône iOS, favicon, interface et README, toutes générées par `scripts/make-icons.mjs`.

@@ -15,7 +15,7 @@
   "toc": "Ouvrir le sommaire",
   "mode": "Basculer entre mode Page et mode Texte",
   "undo": "Annuler",
-  "redo": "Rétablir",
+  "redo": "Rétablir (aussi Ctrl Maj Z)",
   "delete": "Supprimer l'élément sélectionné",
   "move": "Déplacer l'élément sélectionné",
   "keys": {
@@ -23,5 +23,7 @@
     "Espace": "Espace",
     "Maj": "Maj",
     "Suppr": "Suppr"
-  }
+  },
+  "undoAnnotation": "Annuler la dernière annotation ou modification",
+  "redoAnnotation": "Rétablir (aussi Ctrl Maj Z)"
 }

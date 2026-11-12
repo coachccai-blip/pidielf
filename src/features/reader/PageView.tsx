@@ -11,8 +11,9 @@ import { resolveDest, type PageSize } from './useDocument';
 export interface Crop { x: number; y: number; w: number; h: number }
 export const FULL: Crop = { x: 0, y: 0, w: 1, h: 1 };
 
-export type ReaderTool = 'none' | 'ink' | 'note';
-export interface InkStyle { color: string; width: number }
+export type ReaderTool = 'none' | 'ink' | 'marker' | 'note';
+/** Style du trait en cours ; `marker` : surligneur (large, translucide, couleur pastel). */
+export interface InkStyle { color: string; width: number; marker?: boolean }
 
 interface LinkArea { rect: NRect; url?: string; dest?: unknown }
 
@@ -46,6 +47,10 @@ export const inkColors: Record<string, string> = {
   black: '#1c2321',
 };
 export const colorOf = (c: string): string => inkColors[c] ?? c;
+
+/** Couleurs pastel du surligneur. */
+export const pastelColors: Record<string, string> = { yellow: '#ffdd57', green: '#8cde96', blue: '#8cc6ff', pink: '#ffa0c8' };
+export const pastelOf = (c: string): string => pastelColors[c] ?? c;
 
 interface Props {
   pdf: PDFDocumentProxy;
@@ -204,6 +209,17 @@ export const PageView = memo(function PageView({
                 ? a.rects?.map((r, i) => <div key={`${a.id}-${i}`} className={cn('ul', isVertical(r, size) && 'ul-v')} style={{ ...pct(r), color: colorOf(a.color) }} />)
                 : null,
           )}
+          {/* Surlignage libre : une seule couche translucide, pour que les traits qui se croisent ne foncent pas. */}
+          <svg className="marker-layer absolute inset-0 size-full" viewBox={`0 0 ${size.width} ${size.height}`} preserveAspectRatio="none">
+            {annotations.map((a) =>
+              a.kind === 'marker'
+                ? a.strokes?.map((s, i) => (
+                    <path key={`${a.id}-${i}`} d={inkPath(s, size.width, size.height)} fill="none" stroke={pastelOf(a.color)} strokeWidth={a.width ?? 14} strokeLinecap="round" strokeLinejoin="round" />
+                  ))
+                : null,
+            )}
+            {drawing && ink.marker && <path d={inkPath(drawing, size.width, size.height)} fill="none" stroke={pastelOf(ink.color)} strokeWidth={ink.width} strokeLinecap="round" strokeLinejoin="round" />}
+          </svg>
           {hits.map((rects, i) =>
             rects.map((r, k) => <div key={`${i}-${k}`} className={cn('search-hit', i === currentHit && 'current')} style={pct(r)} />),
           )}
@@ -237,7 +253,7 @@ export const PageView = memo(function PageView({
                 ))
               : null,
           )}
-          {drawing && <path d={inkPath(drawing, size.width, size.height)} fill="none" stroke={colorOf(ink.color)} strokeWidth={ink.width} strokeLinecap="round" strokeLinejoin="round" />}
+          {drawing && !ink.marker && <path d={inkPath(drawing, size.width, size.height)} fill="none" stroke={colorOf(ink.color)} strokeWidth={ink.width} strokeLinecap="round" strokeLinejoin="round" />}
         </svg>
 
         {/* Notes : épingles */}
@@ -267,13 +283,13 @@ export const PageView = memo(function PageView({
         {/* Capture des gestes pendant un dessin ou la pose d'une note */}
         {tool !== 'none' && (
           <div
-            className={cn('absolute inset-0 z-[5]', tool === 'ink' ? 'cursor-crosshair touch-none' : 'cursor-copy')}
+            className={cn('absolute inset-0 z-[5]', tool === 'note' ? 'cursor-copy' : 'cursor-crosshair touch-none')}
             onClick={(e) => {
               e.stopPropagation();
               if (tool === 'note') onPlaceNote(page, ...point(e));
             }}
             onPointerDown={(e) => {
-              if (tool !== 'ink' || (e.pointerType === 'mouse' && e.button !== 0)) return;
+              if (tool === 'note' || (e.pointerType === 'mouse' && e.button !== 0)) return;
               e.currentTarget.setPointerCapture(e.pointerId);
               drawingRef.current = [point(e)];
               setDrawing(drawingRef.current);

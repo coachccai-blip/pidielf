@@ -105,12 +105,13 @@
       "highlight": "Surlignage",
       "underline": "Soulignement",
       "note": "Note",
-      "ink": "Dessin"
+      "ink": "Dessin",
+      "marker": "Surlignage libre"
     },
     "noteLabel": "Note",
     "openNote": "Ouvrir la note : {{text}}",
     "edit": "Modifier l'annotation",
-    "selectHint": "Sélectionnez du texte pour le surligner",
+    "selectHint": "Sélectionnez du texte pour le surligner, ou surlignez librement",
     "draw": "Dessiner sur la page",
     "placeNote": "Poser une note",
     "list_one": "Voir l'annotation ({{count}})",
@@ -118,7 +119,12 @@
     "drawHint": "Dessinez sur la page",
     "noteHint": "Touchez la page pour poser la note",
     "width": "Épaisseur du trait",
-    "undoStroke": "Annuler le dernier trait"
+    "marker": "Surligner au surligneur",
+    "markerHint": "Surlignez sur la page",
+    "undo": "Annuler",
+    "redo": "Rétablir",
+    "undone": "Dernière modification annulée.",
+    "redone": "Modification rétablie."
   },
   "export": {
     "title": "Exporter",

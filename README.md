@@ -17,7 +17,7 @@ Gratuit, sans compte, sans serveur : vos fichiers ne quittent jamais votre appar
   recompose le texte comme dans un livre numérique (police, taille, interligne, marges).
 - **Se repérer** — reprise à la dernière page lue, sommaire, miniatures, marque-pages, recherche
   plein texte insensible aux accents.
-- **Annoter** — surlignage (quatre couleurs), soulignement, notes, dessin libre. Les annotations
+- **Annoter** — surlignage du texte sélectionné ou tracé librement au surligneur (quatre couleurs pastel), soulignement, notes, dessin libre ; chaque modification s'annule et se rétablit (Ctrl+Z, Ctrl+Y). Les annotations
   restent dans la bibliothèque ; le fichier d'origine n'est jamais modifié. Export en PDF annoté,
   en texte ou en Markdown.
 - **Ranger** — une bibliothèque locale (IndexedDB) : grille ou liste, recherche, tri, favoris,
@@ -33,7 +33,7 @@ Gratuit, sans compte, sans serveur : vos fichiers ne quittent jamais votre appar
 | Sécuriser | Signer · Protéger (AES 256 bits) · Déverrouiller |
 
 - **Installer** — PidiElf est une PWA : elle s'installe sur l'écran d'accueil, fonctionne hors
-  ligne, reçoit les PDF partagés depuis d'autres applications (Android) et s'ouvre par « Ouvrir
+  ligne, se met à jour toute seule (y compris une fois installée, sans rien demander), reçoit les PDF partagés depuis d'autres applications (Android) et s'ouvre par « Ouvrir
   avec » (bureau, navigateurs Chromium).
 - **Interface** — français par défaut, anglais disponible ; thèmes clair, sombre et automatique ;
   conçue d'abord pour le téléphone ; navigation complète au clavier (touche `?` pour l'aide).
@@ -186,14 +186,14 @@ Free, no account, no server: your files never leave your device.
   like an e-book (font, size, line spacing, margins).
 - **Navigate** — resumes at the last page read, table of contents, thumbnails, bookmarks,
   accent-insensitive full-text search.
-- **Annotate** — highlight (four colours), underline, notes, free drawing. Annotations stay in the
+- **Annotate** — highlight selected text or draw freely with a marker (four pastel colours), underline, notes, free drawing; every change can be undone and redone (Ctrl+Z, Ctrl+Y). Annotations stay in the
   library; the original file is never modified. Export as annotated PDF, text or Markdown.
 - **Organise** — a local library (IndexedDB): grid or list, search, sort, favourites, shelves,
   filters, multi-selection, derived versions, ZIP backup and restore.
 - **Transform** — fifteen tools, all running on the device: Merge, Split, Organise pages, Rotate,
   Compress, OCR, PDF to images, Images to PDF, Scan, Edit, Watermark, Page numbers, Sign, Protect
   (256-bit AES), Unlock.
-- **Install** — PidiElf is a PWA: installable, works offline, receives PDFs shared from other apps
+- **Install** — PidiElf is a PWA: installable, works offline, updates itself automatically (installed or not), receives PDFs shared from other apps
   (Android) and handles “Open with” (desktop, Chromium browsers).
 - **Interface** — French by default, English available; light, dark and automatic themes;
   designed phone-first; fully keyboard-accessible (press `?` for help).

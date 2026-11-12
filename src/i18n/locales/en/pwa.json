@@ -1,8 +1,8 @@
 {
-  "updateReady": "A new version of PidiElf is ready.",
-  "reload": "Reload",
   "offlineReady": "PidiElf is ready to work offline.",
   "installTitle": "Install PidiElf",
   "installText": "Open it straight from your home screen, even offline.",
-  "install": "Install"
+  "install": "Install",
+  "updated": "PidiElf has been updated.",
+  "updatePending": "An update is ready: it will be applied as soon as you are done."
 }

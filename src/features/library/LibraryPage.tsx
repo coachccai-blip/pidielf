@@ -304,7 +304,7 @@ export default function LibraryPage() {
           {visible.length === 0 ? (
             <EmptyState title={t('library.noResultTitle')} text={t('library.noResultText')} mood="searching" />
           ) : (
-            <ul className={grid ? 'grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5' : 'flex flex-col gap-2'}>
+            <ul className={grid ? 'grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5' : 'flex flex-col gap-2'}>
               {visible.map((file) => (
                 <FileItem
                   key={file.id}

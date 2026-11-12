@@ -3,12 +3,15 @@ import { useId, type InputHTMLAttributes, type ReactNode } from 'react';
 import { cn } from './cn';
 
 export function Field({ label, hint, children, className }: { label: string; hint?: string; children: ReactNode; className?: string }) {
+  // L'aide reste hors du <label> : le nom lu par les lecteurs d'écran est le libellé seul.
   return (
-    <label className={cn('flex flex-col gap-1.5', className)}>
-      <span className="text-sm font-bold">{label}</span>
-      {children}
-      {hint && <span className="text-xs text-ink-soft">{hint}</span>}
-    </label>
+    <div className={cn('flex flex-col gap-1.5', className)}>
+      <label className="flex flex-col gap-1.5">
+        <span className="text-sm font-bold">{label}</span>
+        {children}
+      </label>
+      {hint && <p className="text-xs text-ink-soft">{hint}</p>}
+    </div>
   );
 }
 

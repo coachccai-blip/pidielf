@@ -3,6 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { readFile } from 'node:fs/promises';
 import { expect, test as base, type Download, type Page } from '@playwright/test';
 import { PDFDocument } from '@cantoo/pdf-lib';
+import { unzipSync } from 'fflate';
 
 /**
  * Sur bureau, l'application ouvre la fenêtre « Enregistrer sous » du système, qu'un
@@ -85,4 +86,9 @@ export async function pdfText(bytes: Uint8Array, password?: string): Promise<str
   }
   await doc.loadingTask.destroy();
   return out;
+}
+
+/** Contenu d'une archive ZIP : nom → octets. */
+export function unzip(bytes: Uint8Array): Record<string, Uint8Array> {
+  return unzipSync(bytes);
 }

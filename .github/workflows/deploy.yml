@@ -39,6 +39,11 @@ jobs:
         run: |
           npx playwright install --with-deps chromium
           npm run test:e2e
+      - name: Contrôle de l'artefact à publier
+        run: |
+          grep -q precache dist/sw.js
+          test -s dist/index.html
+          test -s dist/manifest.webmanifest
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

@@ -1,8 +1,6 @@
-import { readFile, writeFile } from 'node:fs/promises';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
 import type { Browser, Page } from '@playwright/test';
 import { expect, test } from './helpers';
+import { serveSiteCopy, type SiteCopy } from './site-copy';
 
 // Ces tests ont besoin du service worker : ils ne tournent que sur la version construite.
 test.describe('application installable et hors ligne', () => {
@@ -40,24 +38,21 @@ test.describe('application installable et hors ligne', () => {
     await context.close();
   });
 
-  // Les tests de mise à jour publient une « nouvelle version » en modifiant le service worker
-  // construit, puis le remettent en l'état : ils tournent l'un après l'autre.
+  // Les tests de mise à jour publient une « nouvelle version » sur une copie de la version
+  // construite, servie à part : le dossier dist, qui part en ligne, n'est jamais modifié.
   test.describe('mises à jour automatiques', () => {
     test.describe.configure({ mode: 'serial' });
-    // Un seul projet touche au fichier construit : pas de course entre mobile et bureau.
-    test.skip(({ viewport }) => (viewport?.width ?? 0) < 700, 'vérifié sur le projet bureau');
-    const swFile = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'dist', 'sw.js');
-    let original = '';
+    let site: SiteCopy;
 
-    test.beforeEach(async () => {
-      original = (await readFile(swFile, 'utf8')).replace(/\n\/\/ version de test \d+\n/g, '');
+    test.beforeAll(async () => {
+      site = await serveSiteCopy();
     });
-    test.afterEach(async () => {
-      await writeFile(swFile, original);
+    test.afterAll(async () => {
+      await site?.close();
     });
 
     const publish = async (page: Page) => {
-      await writeFile(swFile, `${original}\n// version de test ${Date.now()}\n`);
+      await site.publish();
       await page.evaluate(async () => {
         await (await navigator.serviceWorker.getRegistration())!.update();
       });
@@ -65,7 +60,7 @@ test.describe('application installable et hors ligne', () => {
     const start = async (browser: Browser, route: string) => {
       const context = await browser.newContext({ serviceWorkers: 'allow' });
       const page = await context.newPage();
-      await page.goto(`./#${route}`);
+      await page.goto(`${site.url}#${route}`);
       await page.waitForFunction(() => navigator.serviceWorker.controller !== null, undefined, { timeout: 30_000 });
       await expect(page.getByText('PidiElf est prête à fonctionner hors ligne.')).toBeVisible({ timeout: 30_000 });
       await page.evaluate(() => ((window as { marque?: boolean }).marque = true));
@@ -103,7 +98,7 @@ test.describe('application installable et hors ligne', () => {
         navigator.serviceWorker.addEventListener('message', (e) => e.stopImmediatePropagation());
         navigator.serviceWorker.addEventListener('controllerchange', (e) => e.stopImmediatePropagation());
       });
-      await page.goto('./#/reglages');
+      await page.goto(`${site.url}#/reglages`);
       await page.waitForFunction(() => navigator.serviceWorker.controller !== null, undefined, { timeout: 30_000 });
       await page.evaluate(() => ((window as { marque?: boolean }).marque = true));
       await publish(page);

@@ -110,6 +110,7 @@ export function resetSettings(): void {
   current = defaultSettings;
   try {
     localStorage.removeItem(KEY);
+    localStorage.removeItem('pidielf:nombre-de-fichiers');
   } catch {
     /* rien à faire */
   }

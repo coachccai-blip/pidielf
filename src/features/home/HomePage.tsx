@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import { ArrowRight, ShieldCheck, Upload } from 'lucide-react';
 import { db, type FileRecord } from '@/db';
@@ -9,6 +10,8 @@ import { Cover } from '@/features/library/Cover';
 import { importFiles, pickFiles } from '@/features/library/import';
 import { ToolGrid } from '@/features/tools/ToolCard';
 
+const COUNT_HINT = 'pidielf:nombre-de-fichiers';
+
 export default function HomePage() {
   const t = useT();
   const reading = useLiveQuery(
@@ -16,6 +19,25 @@ export default function HomePage() {
     [],
   );
   const recent = useLiveQuery(() => db.files.orderBy('addedAt').reverse().limit(8).toArray(), []);
+
+  // La bibliothèque se lit de façon asynchrone : on réserve la place de ce qui va
+  // s'afficher (d'après la dernière visite) pour que la page ne saute pas.
+  const [hint] = useState(() => {
+    try {
+      return Number(localStorage.getItem(COUNT_HINT) ?? 0);
+    } catch {
+      return 0;
+    }
+  });
+  useEffect(() => {
+    if (!recent) return;
+    try {
+      localStorage.setItem(COUNT_HINT, String(recent.length));
+    } catch {
+      /* stockage indisponible : simple confort d'affichage */
+    }
+  }, [recent]);
+  const empty = recent ? recent.length === 0 : hint === 0;
 
   const chooseFiles = async () => {
     const files = await pickFiles({ accept: 'application/pdf,.pdf,image/*', multiple: true });
@@ -97,7 +119,9 @@ export default function HomePage() {
           </section>
         )}
 
-        {recent && recent.length === 0 && (
+        {!recent && hint > 0 && <div aria-hidden="true" style={{ minHeight: 60 + Math.min(6, hint) * 94 }} />}
+
+        {empty && (
           <section className="flex items-center gap-4 rounded-xl border border-line bg-surface p-4 shadow-soft md:p-6">
             <Mascot mood="reading" className="h-24 w-auto shrink-0 md:h-28" />
             <div>

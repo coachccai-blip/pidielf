@@ -1,0 +1,14 @@
+{
+  "title": "Privacy",
+  "subtitle": "In a few lines, no jargon.",
+  "localTitle": "Your files never leave your device",
+  "localText": "PidiElf has no server. Reading, merging, signing, OCR: everything is computed by your browser. No file and no text is sent anywhere.",
+  "storageTitle": "The library is kept in your browser",
+  "storageText": "Your documents, annotations and signatures are stored locally (IndexedDB). They are not synced between devices: use the ZIP backup to move them.",
+  "trackingTitle": "No analytics, no advertising cookies",
+  "trackingText": "PidiElf collects no usage statistics and loads nothing from third-party services. Fonts and OCR models are served by the app itself.",
+  "passwordsTitle": "Passwords are never saved",
+  "passwordsText": "A password typed to protect or unlock a PDF is used for processing, then forgotten.",
+  "eraseTitle": "You can erase everything at any time",
+  "eraseText": "In settings, “Erase everything” empties the library, annotations, signatures and preferences."
+}

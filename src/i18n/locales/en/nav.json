@@ -1,0 +1,10 @@
+{
+  "main": "Main navigation",
+  "skip": "Skip to content",
+  "home": "Home",
+  "library": "Library",
+  "tools": "Tools",
+  "settings": "Settings",
+  "collapse": "Collapse menu",
+  "expand": "Expand menu"
+}

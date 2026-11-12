@@ -1,0 +1,9 @@
+{
+  "suffix": "merged",
+  "hint": "Drag the files to change their order. You can keep only some pages of each.",
+  "keep": "Pages to keep",
+  "allPages": "All",
+  "action": "Merge",
+  "needTwo": "Add at least two files to merge.",
+  "summary": "{{files}} files, {{pages}} pages in total."
+}

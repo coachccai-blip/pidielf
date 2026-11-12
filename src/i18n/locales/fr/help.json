@@ -1,0 +1,22 @@
+{
+  "title": "Raccourcis clavier",
+  "general": "Partout",
+  "reader": "Dans le lecteur",
+  "editor": "Dans les éditeurs",
+  "openHelp": "Afficher cette aide",
+  "close": "Fermer une fenêtre ou un panneau",
+  "tab": "Passer d'un élément au suivant",
+  "turn": "Page précédente ou suivante",
+  "space": "Page suivante (Maj : précédente)",
+  "zoom": "Zoomer ou dézoomer",
+  "search": "Rechercher dans le texte",
+  "fullscreen": "Plein écran",
+  "bookmark": "Poser ou retirer un marque-page",
+  "toc": "Ouvrir le sommaire",
+  "mode": "Basculer entre mode Page et mode Texte",
+  "undo": "Annuler",
+  "redo": "Rétablir",
+  "delete": "Supprimer l'élément sélectionné",
+  "move": "Déplacer l'élément sélectionné",
+  "keys": { "Échap": "Échap", "Espace": "Espace", "Maj": "Maj", "Suppr": "Suppr" }
+}

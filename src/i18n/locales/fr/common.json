@@ -1,0 +1,21 @@
+{
+  "close": "Fermer",
+  "cancel": "Annuler",
+  "confirm": "Valider",
+  "delete": "Supprimer",
+  "create": "Créer",
+  "done": "Terminé",
+  "open": "Ouvrir",
+  "back": "Retour",
+  "loading": "Chargement…",
+  "working": "En cours…",
+  "learnMore": "En savoir plus",
+  "showPassword": "Afficher le mot de passe",
+  "hidePassword": "Masquer le mot de passe",
+  "promise": "Tout se passe dans votre navigateur : vos fichiers ne quittent jamais cet appareil.",
+  "promiseShort": "Vos fichiers restent sur cet appareil.",
+  "pages_one": "{{count}} page",
+  "pages_other": "{{count}} pages",
+  "minutes_one": "{{count}} min",
+  "minutes_other": "{{count}} min"
+}

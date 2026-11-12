@@ -1,0 +1,11 @@
+{
+  "suffix": "rotated",
+  "hint": "Tap a page to add it to the selection or remove it.",
+  "hintBatch": "The same rotation will be applied to every file.",
+  "angle": "Rotation",
+  "left": "Left",
+  "right": "Right",
+  "action": "Rotate",
+  "summary_one": "{{count}} page will be rotated.",
+  "summary_other": "{{count}} pages will be rotated."
+}

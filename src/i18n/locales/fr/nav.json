@@ -1,0 +1,10 @@
+{
+  "main": "Navigation principale",
+  "skip": "Aller au contenu",
+  "home": "Accueil",
+  "library": "Bibliothèque",
+  "tools": "Outils",
+  "settings": "Réglages",
+  "collapse": "Replier le menu",
+  "expand": "Déplier le menu"
+}

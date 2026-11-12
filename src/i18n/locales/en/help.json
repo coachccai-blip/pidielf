@@ -1,0 +1,22 @@
+{
+  "title": "Keyboard shortcuts",
+  "general": "Everywhere",
+  "reader": "In the reader",
+  "editor": "In editors",
+  "openHelp": "Show this help",
+  "close": "Close a window or panel",
+  "tab": "Move to the next element",
+  "turn": "Previous or next page",
+  "space": "Next page (Shift: previous)",
+  "zoom": "Zoom in or out",
+  "search": "Search the text",
+  "fullscreen": "Full screen",
+  "bookmark": "Add or remove a bookmark",
+  "toc": "Open the table of contents",
+  "mode": "Switch between Page and Text mode",
+  "undo": "Undo",
+  "redo": "Redo",
+  "delete": "Delete the selected element",
+  "move": "Move the selected element",
+  "keys": { "Échap": "Esc", "Espace": "Space", "Maj": "Shift", "Suppr": "Del" }
+}

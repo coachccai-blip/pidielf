@@ -1,0 +1,9 @@
+{
+  "suffix": "fusion",
+  "hint": "Faites glisser les fichiers pour changer leur ordre. Vous pouvez ne garder que certaines pages de chacun.",
+  "keep": "Pages à garder",
+  "allPages": "Toutes",
+  "action": "Fusionner",
+  "needTwo": "Ajoutez au moins deux fichiers à fusionner.",
+  "summary": "{{files}} fichiers, {{pages}} pages au total."
+}

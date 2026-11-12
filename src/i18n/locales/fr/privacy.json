@@ -1,0 +1,14 @@
+{
+  "title": "Confidentialité",
+  "subtitle": "En quelques lignes, sans jargon.",
+  "localTitle": "Vos fichiers ne quittent jamais votre appareil",
+  "localText": "PidiElf n'a pas de serveur. Lecture, fusion, signature, OCR : tout est calculé par votre navigateur. Aucun fichier, aucun texte n'est envoyé où que ce soit.",
+  "storageTitle": "La bibliothèque est rangée dans votre navigateur",
+  "storageText": "Vos documents, annotations et signatures sont enregistrés localement (IndexedDB). Ils ne sont pas synchronisés entre appareils : utilisez la sauvegarde ZIP pour les transférer.",
+  "trackingTitle": "Aucune mesure d'audience, aucun cookie publicitaire",
+  "trackingText": "PidiElf ne collecte aucune statistique d'usage et ne charge aucune ressource depuis un service tiers. Polices et modèles OCR sont servis par l'application elle-même.",
+  "passwordsTitle": "Les mots de passe ne sont jamais enregistrés",
+  "passwordsText": "Un mot de passe saisi pour protéger ou déverrouiller un PDF sert au traitement, puis il est oublié.",
+  "eraseTitle": "Vous pouvez tout effacer à tout moment",
+  "eraseText": "Dans les réglages, « Tout effacer » vide la bibliothèque, les annotations, les signatures et les préférences."
+}

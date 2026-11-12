@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>PidiElf — lecteur et outils PDF, dans votre navigateur</title>
+    <meta name="description" content="Lecteur PDF confortable, bibliothèque locale et boîte à outils PDF complète. Gratuit, sans compte : vos fichiers ne quittent jamais votre appareil." />
+    <meta name="theme-color" content="#FAF8F3" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="PidiElf" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="icon" href="icons/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+    <script>
+      // Applique le thème avant le premier rendu, pour éviter un éclair clair en mode sombre.
+      (function () {
+        var choice = 'auto';
+        try {
+          choice = (JSON.parse(localStorage.getItem('pidielf:settings') || '{}').theme) || 'auto';
+        } catch (e) {}
+        var dark = choice === 'dark' || (choice === 'auto' && matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        if (dark) document.querySelector('meta[name="theme-color"]').setAttribute('content', '#151B1D');
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <noscript>PidiElf a besoin de JavaScript pour fonctionner : tout le traitement se fait dans votre navigateur.</noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

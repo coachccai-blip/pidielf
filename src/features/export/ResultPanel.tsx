@@ -40,6 +40,8 @@ export function ResultPanel({
   const [busy, setBusy] = useState(false);
   const savedRef = useRef(saved);
   savedRef.current = saved;
+  const namesRef = useRef(names);
+  namesRef.current = names;
   const started = useRef(false);
 
   const outputs = result.outputs.map((o, i) => ({ ...o, name: names[i] }));
@@ -53,7 +55,10 @@ export function ResultPanel({
     for (const i of indices) {
       if (next[i] || !isPdfOutput(outputs[i])) continue;
       const parentId = outputs[i].parentId && (await db.files.get(outputs[i].parentId!)) ? outputs[i].parentId : undefined;
-      const record = await savePdfToLibrary(outputs[i].name, outputs[i].blob, { origin: 'tool', tool: tool.id, parentId });
+      const name = namesRef.current[i];
+      const record = await savePdfToLibrary(name, outputs[i].blob, { origin: 'tool', tool: tool.id, parentId });
+      // Le fichier a pu être renommé pendant l'enregistrement.
+      if (namesRef.current[i] !== name) await renameFile(record.id, namesRef.current[i]);
       next[i] = record.id;
     }
     savedRef.current = next;
@@ -75,8 +80,9 @@ export function ResultPanel({
   const rename = (i: number, base: string) => {
     const { ext } = splitName(result.outputs[i].name);
     const name = sanitizeFileName(`${base}${ext ? `.${ext}` : ''}`);
-    setNames((prev) => prev.map((n, k) => (k === i ? name : n)));
-    if (saved[i]) void renameFile(saved[i], name);
+    namesRef.current = namesRef.current.map((n, k) => (k === i ? name : n));
+    setNames(namesRef.current);
+    if (savedRef.current[i]) void renameFile(savedRef.current[i], name);
   };
 
   const guard = async (work: () => Promise<void>) => {

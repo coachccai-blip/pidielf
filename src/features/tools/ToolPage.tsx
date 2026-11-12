@@ -181,10 +181,10 @@ export default function ToolPage({ toolId, fileIds }: { toolId: string; fileIds:
         </button>
       }
     >
-      <ol className="mb-5 flex items-center gap-2 text-sm font-bold" aria-label={t('tools.steps.label')}>
+      <ol className="mb-5 flex min-w-0 items-center gap-2 text-sm font-bold" aria-label={t('tools.steps.label')}>
         {steps.map((s, i) => (
           <li key={s.id} className="flex items-center gap-2" aria-current={i === current ? 'step' : undefined}>
-            {i > 0 && <span className={cn('h-0.5 w-5 rounded-full sm:w-10', i <= current ? 'bg-cat-ink' : 'bg-line')} aria-hidden="true" />}
+            {i > 0 && <span className={cn('h-0.5 w-5 rounded-full lg:w-10', i <= current ? 'bg-cat-ink' : 'bg-line')} aria-hidden="true" />}
             <span
               className={cn(
                 'grid size-7 shrink-0 place-items-center rounded-full border-2 text-xs',
@@ -195,13 +195,13 @@ export default function ToolPage({ toolId, fileIds }: { toolId: string; fileIds:
             >
               {i < current ? <Check className="size-4" aria-hidden="true" /> : i + 1}
             </span>
-            <span className={cn(i === current ? 'text-ink' : 'text-ink-soft', i !== current && 'hidden sm:inline')}>{s.label}</span>
+            <span className={cn(i === current ? 'text-ink' : 'text-ink-soft', i !== current && 'hidden lg:inline')}>{s.label}</span>
           </li>
         ))}
         {step !== 'choose' && (
           <li className="ml-auto">
             <Button size="sm" variant="ghost" icon={<RotateCcw />} onClick={restart} aria-label={t('tools.restart')}>
-              <span className="hidden sm:inline">{t('tools.restart')}</span>
+              <span className="hidden lg:inline">{t('tools.restart')}</span>
             </Button>
           </li>
         )}

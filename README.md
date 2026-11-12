@@ -136,7 +136,24 @@ sa licence.
 Sans serveur, quelques fonctions sont moins puissantes que sur un service en ligne ; l'interface
 le dit là où cela compte.
 
-<!-- LIMITES_FR -->
+| Sujet | Limite | Ce que fait l'application |
+| --- | --- | --- |
+| Éditer | Le texte déjà présent dans un PDF ne se modifie pas de façon fiable dans un navigateur. | L'outil ajoute du contenu par-dessus et propose « cacher puis réécrire » (cache blanc suivi d'un nouveau texte). |
+| Polices | Les textes ajoutés (édition, filigrane, numéros, couche OCR) utilisent les polices PDF standard, limitées à l'alphabet latin occidental. | Les caractères d'autres écritures et les émojis sont remplacés par « ? », et l'interface prévient. |
+| Compresser | Le gain est plus faible qu'avec un moteur serveur, surtout sur les PDF sans images. Seules les images JPEG et RVB/gris 8 bits sont recompressées ; les images CMJN, indexées ou masquées sont laissées telles quelles. | Le gain réel est affiché ; un fichier déjà optimisé est signalé et rendu inchangé, jamais alourdi. |
+| OCR | Lent sur téléphone (plusieurs secondes par page). Le premier usage télécharge le moteur et les modèles (environ 5 à 8 Mo). Écriture manuscrite et scans penchés donnent des résultats incertains. | Progression page par page, annulation, avertissement sur le téléchargement, confiance moyenne affichée. |
+| Mode Texte | La recomposition est approximative sur les mises en page complexes (colonnes, tableaux, formules). | Le mode est présenté comme une aide à la lecture ; un appui ramène à la page d'origine. |
+| Rognage des marges | Le cadre est calculé sur un échantillon de pages et appliqué aux pages de même format. | Une page au format différent n'est pas rognée ; le réglage se désactive d'un appui. |
+| Stockage | Le navigateur peut limiter ou vider le stockage local, notamment Safari sur iOS pour un site non installé. | Stockage persistant demandé après le premier import, installation encouragée, sauvegarde ZIP. |
+| Gros fichiers | La mémoire du navigateur limite la taille traitable, surtout sur mobile. | Avertissement au-delà d'environ 100 Mo (mobile) ou 300 Mo (bureau) ; les images exportées sont plafonnées en pixels. |
+| Signature | La signature est une image posée sur la page, sans certificat. | L'outil le précise : ce n'est pas une signature électronique certifiée. |
+| Protéger | Seul le mot de passe d'ouverture est garanti par le chiffrement ; les restrictions (impression, copie, modification) dépendent du lecteur PDF. | L'outil le dit, et ne réutilise jamais le mot de passe d'ouverture comme mot de passe propriétaire. |
+| Déverrouiller | L'outil ne retire une protection qu'avec un mot de passe connu. | Un fichier qui s'ouvre librement mais porte des restrictions exige son mot de passe propriétaire. |
+| Fusionner, Diviser, Organiser | Le sommaire (signets) du PDF d'origine n'est pas reporté dans le résultat. | — |
+| Scanner | Pas de détection automatique des bords : les quatre coins se règlent à la main. Résolution plafonnée (côté long d'environ 2 200 px). | Coins déplaçables au doigt, à la souris et au clavier, avec loupe. |
+| HEIC | Décodé nativement par Safari ; ailleurs, par une bibliothèque chargée à la demande (environ 3 Mo). | Une image illisible est signalée et laissée de côté, les autres sont traitées. |
+| Partage entrant et « Ouvrir avec » | Réservés à l'application installée : partage sur Android, « Ouvrir avec » sur les navigateurs Chromium de bureau. | Ailleurs, l'import passe par le sélecteur de fichiers ou le glisser-déposer. |
+| Synchronisation | Aucune synchronisation entre appareils (hors périmètre). | Sauvegarde et restauration de la bibliothèque en ZIP. |
 
 ## Navigateurs
 
@@ -216,7 +233,24 @@ library loaded on demand in its own file, so it remains replaceable as its licen
 Without a server, a few features are less powerful than an online service; the interface says so
 where it matters.
 
-<!-- LIMITES_EN -->
+| Topic | Limit | What the app does |
+| --- | --- | --- |
+| Edit | Text already present in a PDF cannot be edited reliably in a browser. | The tool adds content on top and offers “hide then rewrite” (a whiteout followed by new text). |
+| Fonts | Added text (editing, watermark, page numbers, OCR layer) uses the standard PDF fonts, limited to Western Latin. | Characters from other scripts and emoji are replaced by “?”, and the interface warns about it. |
+| Compress | Gains are smaller than with a server engine, especially for PDFs without images. Only JPEG and 8-bit RGB/grey images are recompressed; CMYK, indexed or masked images are left as they are. | The real gain is shown; an already-optimised file is reported and returned unchanged, never made heavier. |
+| OCR | Slow on phones (several seconds per page). First use downloads the engine and models (about 5–8 MB). Handwriting and skewed scans give uncertain results. | Page-by-page progress, cancellation, download warning, average confidence shown. |
+| Text mode | Re-flow is approximate on complex layouts (columns, tables, formulas). | Presented as a reading aid; one tap returns to the original page. |
+| Margin cropping | The frame is computed on a sample of pages and applied to pages of the same size. | A page of a different size is not cropped; the setting is one tap away. |
+| Storage | The browser may limit or clear local storage, notably Safari on iOS for a site that is not installed. | Persistent storage requested after the first import, installation encouraged, ZIP backup. |
+| Large files | Browser memory limits what can be processed, especially on mobile. | Warning above roughly 100 MB (mobile) or 300 MB (desktop); exported images are capped in pixels. |
+| Signature | The signature is an image placed on the page, with no certificate. | The tool says so: it is not a certified electronic signature. |
+| Protect | Only the opening password is enforced by encryption; restrictions (print, copy, modify) depend on the PDF reader. | The tool says so, and never reuses the opening password as the owner password. |
+| Unlock | Protection is only removed with a password you know. | A file that opens freely but carries restrictions requires its owner password. |
+| Merge, Split, Organise | The original PDF's outline (bookmarks) is not carried into the result. | — |
+| Scan | No automatic edge detection: the four corners are set by hand. Resolution is capped (long side about 2,200 px). | Corners can be moved by finger, mouse and keyboard, with a magnifier. |
+| HEIC | Decoded natively by Safari; elsewhere by a library loaded on demand (about 3 MB). | An unreadable image is reported and left out; the others are processed. |
+| Incoming share and “Open with” | Only for the installed app: sharing on Android, “Open with” on desktop Chromium browsers. | Elsewhere, import goes through the file picker or drag and drop. |
+| Sync | No synchronisation between devices (out of scope). | ZIP backup and restore of the library. |
 
 ## Browsers
 

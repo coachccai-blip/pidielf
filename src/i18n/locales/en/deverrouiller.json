@@ -1,0 +1,56 @@
+{
+  "suffix": "unlocked",
+  "action": "Unlock",
+  "password": "File password",
+  "ownerPassword": "Owner password",
+  "ownerHint": "Without this password, PidiElf leaves the restrictions in place.",
+  "batchTitle": "Several files",
+  "same": "Same password for all files",
+  "shared": "Shared password",
+  "usesShared": "The shared password will be tried on this file.",
+  "policyTitle": "How it works",
+  "policy": {
+    "known": "PidiElf only removes protection with a password you know.",
+    "never": "It never guesses or bypasses a password, and never stores one.",
+    "owner": "A file that opens freely but forbids printing, copying or editing needs its owner password."
+  },
+  "status": {
+    "checking": "Checking protection…",
+    "open": "Protected by a password to open.",
+    "restricted": "Opens without a password, but with restrictions: {{list}}. Lifting them takes the owner password.",
+    "restrictedOther": "Opens without a password, but with restrictions. Lifting them takes the owner password.",
+    "free": "Restrictions set without any password: they will be removed.",
+    "none": "This file is not protected: there is nothing to remove, it will be left out.",
+    "damaged": "This file is unreadable or damaged: it will be left out."
+  },
+  "limit": {
+    "print": "printing",
+    "copy": "copying",
+    "modify": "editing"
+  },
+  "failure": {
+    "bad-password": "This is not the right password. Check capitals and spaces, then try again.",
+    "owner-required": "This file opens without a password: only its owner password can lift its restrictions.",
+    "not-encrypted": "This file is not protected."
+  },
+  "checking": "Checking files…",
+  "nothing_one": "This file is not protected: there is nothing to unlock.",
+  "nothing_other": "None of these files is protected: there is nothing to unlock.",
+  "needPassword_one": "Enter the file's password.",
+  "needPassword_other": "Enter the password of at least one file.",
+  "summary_one": "The file's protection will be removed.",
+  "summary_other": "The protection of all {{count}} files will be removed.",
+  "summaryPartial": "{{ready}} of {{total}} files will be unlocked; the others will be left out.",
+  "note_one": "Protection removed: this file now opens without a password or restrictions.",
+  "note_other": "Protection removed: these files now open without a password or restrictions.",
+  "notePartial_one": "{{count}} file unlocked. Left out: {{list}}.",
+  "notePartial_other": "{{count}} files unlocked. Left out: {{list}}.",
+  "leftItem": "“{{name}}” ({{reason}})",
+  "reason": {
+    "wrong": "wrong password",
+    "owner": "owner password required",
+    "missing": "no password entered",
+    "none": "not protected",
+    "damaged": "unreadable"
+  }
+}

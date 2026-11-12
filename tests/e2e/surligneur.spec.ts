@@ -75,6 +75,7 @@ test.describe('surligneur et historique des annotations', () => {
     const dialog = page.getByRole('dialog', { name: 'Surlignage' });
     await dialog.getByRole('radio', { name: 'bleu' }).click();
     await dialog.getByRole('button', { name: 'Terminé', exact: true }).click();
+    await expect(dialog).toBeHidden(); // les raccourcis du lecteur sont inactifs tant qu'une fenêtre est ouverte
     await expect(page.locator('[data-page="1"] .hl-blue')).toHaveCount(1);
 
     // Ctrl+Z remonte le temps, modification par modification.
@@ -98,6 +99,7 @@ test.describe('surligneur et historique des annotations', () => {
     // Une suppression s'annule aussi.
     await page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
     await page.getByRole('dialog', { name: 'Surlignage' }).getByRole('button', { name: 'Supprimer' }).click();
+    await expect(page.getByRole('dialog')).toHaveCount(0);
     await expect(highlight).toHaveCount(0);
     await page.keyboard.press('Control+z');
     await expect(page.locator('[data-page="1"] .hl-blue')).toHaveCount(1);

@@ -195,20 +195,22 @@ export function AnnotationDialog({ annotation, history, onClose }: { annotation:
   if (!annotation) return null;
   const fresh = annotation.kind === 'note' && !annotation.text;
 
+  // La fiche se referme tout de suite ; l'enregistrement suit. Les raccourcis du
+  // lecteur (Ctrl+Z…) sont ainsi disponibles dès l'appui sur le bouton.
   const save = async () => {
     const value = text.trim();
+    onClose();
     if (fresh) {
       // Note tout juste posée : elle n'entre dans l'historique qu'une fois écrite.
       await db.annotations.delete(annotation.id);
       if (value) await history.add({ ...annotation, text: value });
     } else if (annotation.kind === 'note' && !value) await history.remove(annotation.id);
     else await history.update(annotation.id, { text: value || undefined });
-    onClose();
   };
   const remove = async () => {
+    onClose();
     if (fresh) await db.annotations.delete(annotation.id);
     else await history.remove(annotation.id);
-    onClose();
   };
 
   return (

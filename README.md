@@ -33,7 +33,7 @@ Gratuit, sans compte, sans serveur : vos fichiers ne quittent jamais votre appar
 | Sécuriser | Signer · Protéger (AES 256 bits) · Déverrouiller |
 
 - **Installer** — PidiElf est une PWA : elle s'installe sur l'écran d'accueil, fonctionne hors
-  ligne, reçoit les PDF partagés depuis d'autres applications (Android) et s'ouvre par « Ouvrir
+  ligne, se met à jour toute seule (y compris une fois installée, sans rien demander), reçoit les PDF partagés depuis d'autres applications (Android) et s'ouvre par « Ouvrir
   avec » (bureau, navigateurs Chromium).
 - **Interface** — français par défaut, anglais disponible ; thèmes clair, sombre et automatique ;
   conçue d'abord pour le téléphone ; navigation complète au clavier (touche `?` pour l'aide).
@@ -193,7 +193,7 @@ Free, no account, no server: your files never leave your device.
 - **Transform** — fifteen tools, all running on the device: Merge, Split, Organise pages, Rotate,
   Compress, OCR, PDF to images, Images to PDF, Scan, Edit, Watermark, Page numbers, Sign, Protect
   (256-bit AES), Unlock.
-- **Install** — PidiElf is a PWA: installable, works offline, receives PDFs shared from other apps
+- **Install** — PidiElf is a PWA: installable, works offline, updates itself automatically (installed or not), receives PDFs shared from other apps
   (Android) and handles “Open with” (desktop, Chromium browsers).
 - **Interface** — French by default, English available; light, dark and automatic themes;
   designed phone-first; fully keyboard-accessible (press `?` for help).

@@ -1,8 +1,8 @@
 {
-  "updateReady": "Une nouvelle version de PidiElf est prête.",
-  "reload": "Recharger",
   "offlineReady": "PidiElf est prête à fonctionner hors ligne.",
   "installTitle": "Installer PidiElf",
   "installText": "Accès direct depuis l'écran d'accueil, même sans connexion.",
-  "install": "Installer"
+  "install": "Installer",
+  "updated": "PidiElf a été mise à jour.",
+  "updatePending": "Une mise à jour est prête : elle s'appliquera dès que vous aurez terminé."
 }

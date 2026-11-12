@@ -21,7 +21,8 @@ export default defineConfig({
     react(),
     tailwindcss(),
     VitePWA({
-      registerType: 'prompt',
+      // L'enregistrement et les mises à jour automatiques sont gérés par src/pwa/register.ts.
+      registerType: 'autoUpdate',
       injectRegister: false,
       includeAssets: ['icons/*.png', 'icons/*.svg'],
       manifest: {

@@ -17,11 +17,11 @@
   "status": {
     "checking": "Vérification de la protection…",
     "open": "Protégé par un mot de passe d'ouverture.",
-    "restricted": "S'ouvre sans mot de passe, mais avec des restrictions : {{list}}. Pour les lever, il faut le mot de passe propriétaire.",
+    "restricted": "S'ouvre sans mot de passe, mais avec des restrictions : {{list}}. Pour les lever, il faut le mot de passe propriétaire.",
     "restrictedOther": "S'ouvre sans mot de passe, mais avec des restrictions. Pour les lever, il faut le mot de passe propriétaire.",
-    "free": "Restrictions posées sans aucun mot de passe : elles seront retirées.",
-    "none": "Ce fichier n'est pas protégé : il n'y a rien à retirer, il sera laissé de côté.",
-    "damaged": "Ce fichier est illisible ou abîmé : il sera laissé de côté."
+    "free": "Restrictions posées sans aucun mot de passe : elles seront retirées.",
+    "none": "Ce fichier n'est pas protégé : il n'y a rien à retirer, il sera laissé de côté.",
+    "damaged": "Ce fichier est illisible ou abîmé : il sera laissé de côté."
   },
   "limit": {
     "print": "impression",
@@ -30,22 +30,22 @@
   },
   "failure": {
     "bad-password": "Ce mot de passe n'est pas le bon. Vérifiez les majuscules et les espaces, puis réessayez.",
-    "owner-required": "Ce fichier s'ouvre sans mot de passe : seul son mot de passe propriétaire peut lever ses restrictions.",
+    "owner-required": "Ce fichier s'ouvre sans mot de passe : seul son mot de passe propriétaire peut lever ses restrictions.",
     "not-encrypted": "Ce fichier n'est pas protégé."
   },
   "checking": "Vérification des fichiers…",
-  "nothing_one": "Ce fichier n'est pas protégé : il n'y a rien à déverrouiller.",
-  "nothing_other": "Aucun de ces fichiers n'est protégé : il n'y a rien à déverrouiller.",
+  "nothing_one": "Ce fichier n'est pas protégé : il n'y a rien à déverrouiller.",
+  "nothing_other": "Aucun de ces fichiers n'est protégé : il n'y a rien à déverrouiller.",
   "needPassword_one": "Saisissez le mot de passe du fichier.",
   "needPassword_other": "Saisissez le mot de passe d'au moins un fichier.",
   "summary_one": "La protection du fichier sera retirée.",
   "summary_other": "La protection des {{count}} fichiers sera retirée.",
-  "summaryPartial": "Sur {{total}} fichiers, {{ready}} à déverrouiller ; les autres seront laissés de côté.",
-  "note_one": "Protection retirée : ce fichier s'ouvre désormais sans mot de passe, sans restriction.",
-  "note_other": "Protection retirée : ces fichiers s'ouvrent désormais sans mot de passe, sans restriction.",
-  "notePartial_one": "{{count}} fichier déverrouillé. Laissés de côté : {{list}}.",
-  "notePartial_other": "{{count}} fichiers déverrouillés. Laissés de côté : {{list}}.",
-  "leftItem": "« {{name}} » ({{reason}})",
+  "summaryPartial": "Sur {{total}} fichiers, {{ready}} à déverrouiller ; les autres seront laissés de côté.",
+  "note_one": "Protection retirée : ce fichier s'ouvre désormais sans mot de passe, sans restriction.",
+  "note_other": "Protection retirée : ces fichiers s'ouvrent désormais sans mot de passe, sans restriction.",
+  "notePartial_one": "{{count}} fichier déverrouillé. Laissés de côté : {{list}}.",
+  "notePartial_other": "{{count}} fichiers déverrouillés. Laissés de côté : {{list}}.",
+  "leftItem": "« {{name}} » ({{reason}})",
   "reason": {
     "wrong": "mot de passe incorrect",
     "owner": "mot de passe propriétaire requis",

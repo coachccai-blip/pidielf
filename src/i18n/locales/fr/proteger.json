@@ -5,8 +5,8 @@
   "password": "Mot de passe",
   "confirmation": "Confirmer le mot de passe",
   "mismatch": "Les deux saisies ne sont pas identiques.",
-  "keepSafe": "Notez-le en lieu sûr : PidiElf ne l'enregistre nulle part et ne pourra pas vous le rappeler.",
-  "strengthLabel": "Solidité :",
+  "keepSafe": "Notez-le en lieu sûr : PidiElf ne l'enregistre nulle part et ne pourra pas vous le rappeler.",
+  "strengthLabel": "Solidité :",
   "strengthEmpty": "La solidité du mot de passe s'affichera ici.",
   "strength": {
     "veryWeak": "très faible",
@@ -17,7 +17,7 @@
   },
   "advice": {
     "common": "trop courant, il se devine tout de suite",
-    "short": "allongez-le : une phrase de quelques mots fait merveille",
+    "short": "allongez-le : une phrase de quelques mots fait merveille",
     "pattern": "évitez les suites, les répétitions et les dates",
     "variety": "mêlez lettres, chiffres et signes"
   },
@@ -27,21 +27,30 @@
     "copy": "Autoriser la copie du texte et des images",
     "modify": "Autoriser la modification"
   },
-  "honest": "Seul le mot de passe d'ouverture est garanti par le chiffrement. Les restrictions sont respectées par les lecteurs PDF sérieux, mais ce n'est pas une protection forte : qui peut ouvrir le fichier peut, avec d'autres logiciels, passer outre.",
+  "honest": "Seul le mot de passe d'ouverture est garanti par le chiffrement. Les restrictions sont respectées par les lecteurs PDF sérieux, mais ce n'est pas une protection forte : qui peut ouvrir le fichier peut, avec d'autres logiciels, passer outre.",
   "advanced": "Options avancées",
   "owner": "Mot de passe propriétaire (facultatif)",
   "ownerHint": "Il sert à changer ou à lever les restrictions plus tard. Il doit être différent du mot de passe d'ouverture.",
-  "ownerRandom": "Laissé vide, PidiElf en tire un au hasard, qu'il n'affiche pas et ne garde pas : les restrictions ne pourront donc plus être levées par ce moyen. Le mot de passe d'ouverture, lui, ouvrira toujours le fichier.",
-  "ownerSame": "Le mot de passe propriétaire doit être différent du mot de passe d'ouverture : sinon, ouvrir le fichier donnerait tous les droits.",
+  "ownerRandom": "Laissé vide, PidiElf en tire un au hasard, qu'il n'affiche pas et ne garde pas : les restrictions ne pourront donc plus être levées par ce moyen. Le mot de passe d'ouverture, lui, ouvrira toujours le fichier.",
+  "ownerSame": "Le mot de passe propriétaire doit être différent du mot de passe d'ouverture : sinon, ouvrir le fichier donnerait tous les droits.",
   "needPassword": "Saisissez un mot de passe d'ouverture.",
   "needConfirmation": "Confirmez le mot de passe en le saisissant une seconde fois.",
   "summary": "Le fichier sera chiffré en AES 256 bits.",
-  "note": "Chiffrement AES 256 bits. Conservez bien le mot de passe : sans lui, le fichier ne peut plus être ouvert, et personne ne peut le retrouver à votre place.",
+  "note": "Chiffrement AES 256 bits. Conservez bien le mot de passe : sans lui, le fichier ne peut plus être ouvert, et personne ne peut le retrouver à votre place.",
   "previewTitle": "Ce que fera la protection",
   "previewOpen": "Le mot de passe sera demandé à chaque ouverture. Contenu chiffré en AES 256 bits.",
   "preview": {
-    "print": { "on": "Impression autorisée", "off": "Impression interdite" },
-    "copy": { "on": "Copie du texte et des images autorisée", "off": "Copie du texte et des images interdite" },
-    "modify": { "on": "Modification autorisée", "off": "Modification interdite" }
+    "print": {
+      "on": "Impression autorisée",
+      "off": "Impression interdite"
+    },
+    "copy": {
+      "on": "Copie du texte et des images autorisée",
+      "off": "Copie du texte et des images interdite"
+    },
+    "modify": {
+      "on": "Modification autorisée",
+      "off": "Modification interdite"
+    }
   }
 }

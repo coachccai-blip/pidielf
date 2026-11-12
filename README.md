@@ -68,6 +68,8 @@ L'application est servie sur `http://localhost:5173/pidielf/`.
 | `npm test` | Tests unitaires des traitements (Vitest) |
 | `npm run test:e2e` | Tests de parcours sur mobile et bureau (Playwright, sur la version construite) |
 | `npm run fixtures` | Régénère les fichiers d'exemple de `tests/fixtures` |
+| `node scripts/screenshots.mjs` | Régénère les captures d'écran de ce README (version construite servie sur le port 4173) |
+| `node scripts/make-icons.mjs` | Régénère les icônes de l'application à partir du logo |
 
 Les scripts `predev` et `prebuild` copient dans `public/vendor` les ressources que l'application
 sert elle-même (données pdf.js, moteur et modèles Tesseract).
@@ -124,7 +126,7 @@ télécharger, partager, enregistrer dans la bibliothèque, enchaîner un autre 
 | PWA | `vite-plugin-pwa`, `workbox-*` | MIT |
 | Images HEIC | `heic-to` (libheif), chargé à la demande | LGPL-3.0 |
 | Polices | Cormorant Garamond, Nunito, Literata, Atkinson Hyperlegible, Caveat (Fontsource) | OFL-1.1 |
-| Tests | `vitest`, `@playwright/test`, `@axe-core/playwright`, `fake-indexeddb`, `sharp` | MIT, Apache-2.0, MPL-2.0, Apache-2.0, Apache-2.0 |
+| Tests et scripts | `vitest`, `@playwright/test`, `@axe-core/playwright`, `sharp` | MIT, Apache-2.0, MPL-2.0, Apache-2.0 |
 
 PidiElf est publié sous licence **MIT** (voir [`LICENSE`](LICENSE)). Aucun moteur sous AGPL
 (Ghostscript, MuPDF) n'est utilisé. `heic-to` (LGPL-3.0) est une bibliothèque séparée, non
@@ -139,6 +141,7 @@ le dit là où cela compte.
 | Sujet | Limite | Ce que fait l'application |
 | --- | --- | --- |
 | Éditer | Le texte déjà présent dans un PDF ne se modifie pas de façon fiable dans un navigateur. | L'outil ajoute du contenu par-dessus et propose « cacher puis réécrire » (cache blanc suivi d'un nouveau texte). |
+| Cache blanc | Un cache blanc masque une zone à l'écran et à l'impression, mais le contenu d'origine reste dans le fichier. | L'outil le précise : ce n'est pas une suppression définitive (caviardage). |
 | Polices | Les textes ajoutés (édition, filigrane, numéros, couche OCR) utilisent les polices PDF standard, limitées à l'alphabet latin occidental. | Les caractères d'autres écritures et les émojis sont remplacés par « ? », et l'interface prévient. |
 | Compresser | Le gain est plus faible qu'avec un moteur serveur, surtout sur les PDF sans images. Seules les images JPEG et RVB/gris 8 bits sont recompressées ; les images CMJN, indexées ou masquées sont laissées telles quelles. | Le gain réel est affiché ; un fichier déjà optimisé est signalé et rendu inchangé, jamais alourdi. |
 | OCR | Lent sur téléphone (plusieurs secondes par page). Le premier usage télécharge le moteur et les modèles (environ 5 à 8 Mo). Écriture manuscrite et scans penchés donnent des résultats incertains. | Progression page par page, annulation, avertissement sur le téléchargement, confiance moyenne affichée. |
@@ -154,6 +157,13 @@ le dit là où cela compte.
 | HEIC | Décodé nativement par Safari ; ailleurs, par une bibliothèque chargée à la demande (environ 3 Mo). | Une image illisible est signalée et laissée de côté, les autres sont traitées. |
 | Partage entrant et « Ouvrir avec » | Réservés à l'application installée : partage sur Android, « Ouvrir avec » sur les navigateurs Chromium de bureau. | Ailleurs, l'import passe par le sélecteur de fichiers ou le glisser-déposer. |
 | Synchronisation | Aucune synchronisation entre appareils (hors périmètre). | Sauvegarde et restauration de la bibliothèque en ZIP. |
+
+## Qualité vérifiée
+
+- **Tests unitaires** (Vitest) : chaque traitement PDF ou image, sur de petits fichiers d'exemple ; cohérence des traductions ; contraste WCAG AA de tous les couples texte/fond.
+- **Tests de parcours** (Playwright), sur mobile et sur bureau : chaque espace et chacun des quinze outils, jusqu'au fichier téléchargé, qui est relu et contrôlé ; fonctionnement hors ligne ; sauvegarde et restauration.
+- **Accessibilité** : contrôle axe-core (WCAG 2.1 A et AA) de tous les écrans et de tous les outils, en clair et en sombre.
+- **Lighthouse** (accueil, mobile et bureau) : Performance 100, Accessibilité 100, Bonnes pratiques 100 ; premier chargement d'environ 170 Ko compressés.
 
 ## Navigateurs
 
@@ -236,6 +246,7 @@ where it matters.
 | Topic | Limit | What the app does |
 | --- | --- | --- |
 | Edit | Text already present in a PDF cannot be edited reliably in a browser. | The tool adds content on top and offers “hide then rewrite” (a whiteout followed by new text). |
+| Whiteout | A whiteout hides an area on screen and in print, but the original content stays in the file. | The tool says so: it is not a permanent removal (redaction). |
 | Fonts | Added text (editing, watermark, page numbers, OCR layer) uses the standard PDF fonts, limited to Western Latin. | Characters from other scripts and emoji are replaced by “?”, and the interface warns about it. |
 | Compress | Gains are smaller than with a server engine, especially for PDFs without images. Only JPEG and 8-bit RGB/grey images are recompressed; CMYK, indexed or masked images are left as they are. | The real gain is shown; an already-optimised file is reported and returned unchanged, never made heavier. |
 | OCR | Slow on phones (several seconds per page). First use downloads the engine and models (about 5–8 MB). Handwriting and skewed scans give uncertain results. | Page-by-page progress, cancellation, download warning, average confidence shown. |

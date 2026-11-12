@@ -10,5 +10,5 @@
   "tools": "Boîte à outils",
   "pageOf": "Page {{page}} sur {{total}}",
   "emptyTitle": "Votre bibliothèque est encore vide",
-  "emptyText": "Importez un premier PDF : il restera rangé ici, même hors ligne."
+  "emptyText": "Importez un premier PDF : il restera rangé ici, même hors ligne."
 }

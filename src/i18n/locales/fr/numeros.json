@@ -12,7 +12,7 @@
     "bottom-right": "En bas à droite"
   },
   "mirror": "Marges miroir",
-  "mirrorHint": "Pour l'impression recto verso : le côté choisi vaut pour les pages impaires et s'inverse sur les pages paires.",
+  "mirrorHint": "Pour l'impression recto verso : le côté choisi vaut pour les pages impaires et s'inverse sur les pages paires.",
   "mirrorCentered": "Sans effet tant que le numéro est centré.",
   "margin": "Distance au bord",
   "millimetres": "{{n}} mm",
@@ -23,7 +23,7 @@
   "prefixHint": "Lettres latines et accents uniquement.",
   "start": "Numéro de départ",
   "exclude": "Pages à ne pas numéroter",
-  "excludeHint": "Exemple : 1 pour une couverture, ou 1-2, 12. Laissez vide pour tout numéroter.",
+  "excludeHint": "Exemple : 1 pour une couverture, ou 1-2, 12. Laissez vide pour tout numéroter.",
   "excludeInvalid": "Cette liste de pages n'est pas valide.",
   "sequenceHint": "La première page numérotée porte le numéro de départ.",
   "countExcluded": "Compter les pages exclues",
@@ -39,7 +39,7 @@
   "points": "{{n}} pt",
   "bold": "Gras",
   "color": "Couleur",
-  "previewNumber": "Sur cette page : « {{text}} », {{where}}.",
+  "previewNumber": "Sur cette page : « {{text}} », {{where}}.",
   "previewNone": "Cette page ne porte pas de numéro.",
   "where": {
     "top-left": "en haut à gauche",
@@ -49,7 +49,7 @@
     "bottom-center": "en bas au centre",
     "bottom-right": "en bas à droite"
   },
-  "noneLeft": "Toutes les pages sont exclues : il n'y a rien à numéroter.",
+  "noneLeft": "Toutes les pages sont exclues : il n'y a rien à numéroter.",
   "summary_one": "{{count}} page sera numérotée.",
   "summary_other": "{{count}} pages seront numérotées."
 }

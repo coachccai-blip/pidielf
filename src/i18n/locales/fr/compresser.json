@@ -16,18 +16,18 @@
       "desc": "Le fichier le plus léger. Les images perdent en finesse."
     }
   },
-  "hint": "Seules les images sont allégées : le texte reste net et sélectionnable. Le gain est fort sur les scans et les photos, faible sur un PDF surtout fait de texte, et plus modeste qu'avec un service en ligne. Les tailles réelles, avant et après, s'affichent à la fin.",
+  "hint": "Seules les images sont allégées : le texte reste net et sélectionnable. Le gain est fort sur les scans et les photos, faible sur un PDF surtout fait de texte, et plus modeste qu'avec un service en ligne. Les tailles réelles, avant et après, s'affichent à la fin.",
   "files": "Fichiers à compresser",
-  "current": "Taille actuelle : {{size}}.",
+  "current": "Taille actuelle : {{size}}.",
   "currentBatch_one": "{{count}} fichier · {{size}}.",
   "currentBatch_other": "{{count}} fichiers · {{size}} au total.",
   "noteImages_one": "{{count}} image allégée sur {{total}}. Le texte reste du texte sélectionnable.",
   "noteImages_other": "{{count}} images allégées sur {{total}}. Le texte reste du texte sélectionnable.",
-  "noteStructure": "Les images de ce PDF étaient déjà bien compressées : seule la structure du fichier a été compactée.",
-  "noteNoImages": "Ce PDF ne contient pas d'images : seule sa structure a pu être compactée, le gain reste donc modeste.",
+  "noteStructure": "Les images de ce PDF étaient déjà bien compressées : seule la structure du fichier a été compactée.",
+  "noteNoImages": "Ce PDF ne contient pas d'images : seule sa structure a pu être compactée, le gain reste donc modeste.",
   "noteSameNoImages": "Ce PDF ne contient pas d'images et sa structure est déjà compacte. Il vous est rendu tel quel.",
   "noteSameImages": "Les images de ce PDF sont déjà bien compressées, ou dans un format que PidiElf préfère ne pas toucher. Le fichier vous est rendu tel quel.",
-  "noteNoCodec": "Ce navigateur ne permet pas de recompresser les images : seule la structure du fichier a été optimisée. Un navigateur récent donnera un meilleur résultat.",
-  "noteBatch": "Fichiers allégés : {{done}} sur {{total}}.",
+  "noteNoCodec": "Ce navigateur ne permet pas de recompresser les images : seule la structure du fichier a été optimisée. Un navigateur récent donnera un meilleur résultat.",
+  "noteBatch": "Fichiers allégés : {{done}} sur {{total}}.",
   "noteBatchSame": "Les fichiers déjà optimisés vous sont rendus tels quels."
 }

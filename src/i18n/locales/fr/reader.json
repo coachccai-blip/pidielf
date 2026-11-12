@@ -1,6 +1,6 @@
 {
   "opening": "Ouverture du document…",
-  "passwordText": "« {{name}} » est protégé. Saisissez son mot de passe pour le lire. Il n'est jamais enregistré.",
+  "passwordText": "« {{name}} » est protégé. Saisissez son mot de passe pour le lire. Il n'est jamais enregistré.",
   "retryPassword": "Saisir le mot de passe",
   "missingTitle": "Document introuvable",
   "missingText": "Ce fichier n'est plus dans la bibliothèque de cet appareil.",
@@ -24,7 +24,7 @@
   "ocrOffer": "Rendre ce scan cherchable (OCR)",
   "internalLink": "Lien vers une autre page",
   "toolsHint": "L'outil choisi s'ouvre avec ce document déjà chargé.",
-  "toolsProtected": "Ce PDF est protégé : déverrouillez-le d'abord pour utiliser les autres outils.",
+  "toolsProtected": "Ce PDF est protégé : déverrouillez-le d'abord pour utiliser les autres outils.",
   "panel": {
     "title": "Repères",
     "toc": "Sommaire",
@@ -52,10 +52,15 @@
     "mode": "Mode de lecture",
     "modePage": "Mode Page",
     "modeText": "Mode Texte",
-    "modeHint": "Le mode Texte recompose le texte comme dans un livre numérique. C'est une aide à la lecture : colonnes, tableaux et formules peuvent être approximatifs.",
+    "modeHint": "Le mode Texte recompose le texte comme dans un livre numérique. C'est une aide à la lecture : colonnes, tableaux et formules peuvent être approximatifs.",
     "noText": "Ce PDF ne contient pas de texte (document scanné). Lancez l'OCR pour le rendre lisible en mode Texte.",
     "paper": "Papier",
-    "papers": { "white": "Blanc", "sepia": "Sépia", "grey": "Gris doux", "night": "Nuit" },
+    "papers": {
+      "white": "Blanc",
+      "sepia": "Sépia",
+      "grey": "Gris doux",
+      "night": "Nuit"
+    },
     "brightness": "Luminosité",
     "warmth": "Chaleur",
     "scroll": "Défilement",
@@ -84,15 +89,26 @@
   "annotations": {
     "selectionBar": "Actions sur le texte sélectionné",
     "highlightIn": "Surligner en {{color}}",
-    "colors": { "yellow": "jaune", "green": "vert", "blue": "bleu", "pink": "rose", "black": "noir" },
+    "colors": {
+      "yellow": "jaune",
+      "green": "vert",
+      "blue": "bleu",
+      "pink": "rose",
+      "black": "noir"
+    },
     "color": "Couleur",
     "underline": "Souligner",
     "addNote": "Ajouter une note",
     "copy": "Copier",
     "copied": "Texte copié.",
-    "kinds": { "highlight": "Surlignage", "underline": "Soulignement", "note": "Note", "ink": "Dessin" },
+    "kinds": {
+      "highlight": "Surlignage",
+      "underline": "Soulignement",
+      "note": "Note",
+      "ink": "Dessin"
+    },
     "noteLabel": "Note",
-    "openNote": "Ouvrir la note : {{text}}",
+    "openNote": "Ouvrir la note : {{text}}",
     "edit": "Modifier l'annotation",
     "selectHint": "Sélectionnez du texte pour le surligner",
     "draw": "Dessiner sur la page",

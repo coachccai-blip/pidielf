@@ -7,7 +7,7 @@
   "close": "Fermer une fenêtre ou un panneau",
   "tab": "Passer d'un élément au suivant",
   "turn": "Page précédente ou suivante",
-  "space": "Page suivante (Maj : précédente)",
+  "space": "Page suivante (Maj : précédente)",
   "zoom": "Zoomer ou dézoomer",
   "search": "Rechercher dans le texte",
   "fullscreen": "Plein écran",
@@ -18,5 +18,10 @@
   "redo": "Rétablir",
   "delete": "Supprimer l'élément sélectionné",
   "move": "Déplacer l'élément sélectionné",
-  "keys": { "Échap": "Échap", "Espace": "Espace", "Maj": "Maj", "Suppr": "Suppr" }
+  "keys": {
+    "Échap": "Échap",
+    "Espace": "Espace",
+    "Maj": "Maj",
+    "Suppr": "Suppr"
+  }
 }

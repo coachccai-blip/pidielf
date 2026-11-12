@@ -37,14 +37,14 @@
     "libraryEmpty": "La bibliothèque est vide. Choisissez un fichier depuis l'appareil.",
     "add_one": "Ajouter {{count}} fichier",
     "add_other": "Ajouter {{count}} fichiers",
-    "rejectedPdf_one": "{{count}} fichier ignoré : cet outil attend des PDF.",
-    "rejectedPdf_other": "{{count}} fichiers ignorés : cet outil attend des PDF.",
-    "rejectedImage_one": "{{count}} fichier ignoré : cet outil attend des images.",
-    "rejectedImage_other": "{{count}} fichiers ignorés : cet outil attend des images."
+    "rejectedPdf_one": "{{count}} fichier ignoré : cet outil attend des PDF.",
+    "rejectedPdf_other": "{{count}} fichiers ignorés : cet outil attend des PDF.",
+    "rejectedImage_one": "{{count}} fichier ignoré : cet outil attend des images.",
+    "rejectedImage_other": "{{count}} fichiers ignorés : cet outil attend des images."
   },
   "password": {
     "title": "PDF protégé",
-    "text": "« {{name}} » est protégé. Saisissez son mot de passe pour continuer. Il n'est jamais enregistré.",
+    "text": "« {{name}} » est protégé. Saisissez son mot de passe pour continuer. Il n'est jamais enregistré.",
     "label": "Mot de passe",
     "unlock": "Déverrouiller",
     "wrong": "Ce mot de passe n'est pas le bon. Réessayez."
@@ -56,7 +56,7 @@
     "even": "Pages paires",
     "custom": "Une sélection",
     "pages": "Pages",
-    "pagesHint": "Exemple : 1-3, 5, 8-"
+    "pagesHint": "Exemple : 1-3, 5, 8-"
   },
   "fusionner": {
     "name": "Fusionner",

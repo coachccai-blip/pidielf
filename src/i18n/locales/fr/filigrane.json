@@ -10,7 +10,7 @@
   "text": "Texte",
   "defaultText": "CONFIDENTIEL",
   "textHint": "Lettres latines, accents et ponctuation courante. Les autres écritures et les émojis ne sont pas pris en charge.",
-  "textReplaced": "Certains caractères ne peuvent pas être écrits : ils sont remplacés par « ? ».",
+  "textReplaced": "Certains caractères ne peuvent pas être écrits : ils sont remplacés par « ? ».",
   "textMissing": "Saisissez le texte du filigrane.",
   "font": "Police",
   "fonts": {

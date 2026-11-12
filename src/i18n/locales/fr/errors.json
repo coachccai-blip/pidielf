@@ -1,9 +1,9 @@
 {
   "generic": "Quelque chose n'a pas fonctionné. Réessayez.",
-  "heavy": "Ce fichier est volumineux : le traitement peut être lent ou échouer sur cet appareil.",
+  "heavy": "Ce fichier est volumineux : le traitement peut être lent ou échouer sur cet appareil.",
   "encrypted": {
     "title": "Ce fichier est protégé par un mot de passe.",
-    "action": "Déverrouillez-le d'abord avec l'outil « Déverrouiller », puis recommencez."
+    "action": "Déverrouillez-le d'abord avec l'outil « Déverrouiller », puis recommencez."
   },
   "bad-password": {
     "title": "Le mot de passe n'est pas le bon.",

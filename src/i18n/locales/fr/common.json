@@ -12,7 +12,7 @@
   "learnMore": "En savoir plus",
   "showPassword": "Afficher le mot de passe",
   "hidePassword": "Masquer le mot de passe",
-  "promise": "Tout se passe dans votre navigateur : vos fichiers ne quittent jamais cet appareil.",
+  "promise": "Tout se passe dans votre navigateur : vos fichiers ne quittent jamais cet appareil.",
   "promiseShort": "Vos fichiers restent sur cet appareil.",
   "pages_one": "{{count}} page",
   "pages_other": "{{count}} pages",

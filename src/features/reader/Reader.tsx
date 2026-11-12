@@ -3,10 +3,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLiveQuery } from 'dexie-react-hooks';
 import {
   ALargeSmall, ArrowLeft, Bookmark, BookOpenText, Check, FileOutput, FileText, Highlighter, ListTree, Maximize, Minimize,
-  MoreVertical, PenLine, ScanText, Search, StickyNote, Undo2, Wrench, ZoomIn, ZoomOut,
+  MoreVertical, PenLine, Redo2, ScanText, Search, StickyNote, Undo2, Wrench, ZoomIn, ZoomOut,
 } from 'lucide-react';
 import { db, newId, type AnnotationRecord, type FileRecord } from '@/db';
 import { saveProgress } from '@/db/files';
+import { straighten } from '@/core/marker';
 import { formatDuration, formatPercent, useT } from '@/i18n';
 import type { PDFDocumentProxy } from '@/lib/pdfjs';
 import { back, navigate, routes } from '@/lib/router';
@@ -18,13 +19,15 @@ import { toast } from '@/ui/toast';
 import { ToolGrid } from '@/features/tools/ToolCard';
 import { AnnotationDialog, ExportDialog, HIGHLIGHT_COLORS, SelectionToolbar } from './annotations';
 import { PageMode, type PageModeHandle } from './PageMode';
-import { colorOf, type InkStyle, type ReaderTool } from './PageView';
+import { AnnotationHistory, useHistoryState } from './history';
+import { colorOf, pastelOf, type InkStyle, type ReaderTool } from './PageView';
 import { DisplaySheet, SearchBar, SidePanel, useSearch, useSortedBookmarks, type PanelTab } from './panels';
 import { TextMode, type TextModeHandle } from './TextMode';
 import { useOutline, usePageSizes, useTextCache, useWordsPerPage } from './useDocument';
 import './reader.css';
 
 const WORDS_PER_MINUTE = 230;
+const MARKER_WIDTHS = [8, 14, 22];
 
 export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf: PDFDocumentProxy }) {
   const t = useT();
@@ -50,6 +53,11 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
   const [exporting, setExporting] = useState(false);
   const [tool, setTool] = useState<ReaderTool>('none');
   const [ink, setInk] = useState<InkStyle>({ color: 'blue', width: 2 });
+  const [marker, setMarker] = useState<InkStyle>({ color: 'yellow', width: 14, marker: true });
+  const [announcement, setAnnouncement] = useState('');
+  // Historique des annotations : Ctrl+Z annule, Ctrl+Y rétablit.
+  const history = useMemo(() => new AnnotationHistory(), [file.id]); // eslint-disable-line react-hooks/exhaustive-deps
+  const { canUndo, canRedo } = useHistoryState(history);
   const [editing, setEditing] = useState<string | null>(null);
   const [fullscreen, setFullscreen] = useState(false);
   const [wide, setWide] = useState(window.innerWidth >= 900);
@@ -59,7 +67,6 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
   const textMode = useRef<TextModeHandle>(null);
   const pageRef = useRef(page);
   pageRef.current = page;
-  const lastStrokes = useRef<string[]>([]);
 
   const annotations = useLiveQuery(() => db.annotations.where('fileId').equals(file.id).toArray(), [file.id]) ?? [];
   const bookmarks = useSortedBookmarks(useLiveQuery(() => db.bookmarks.where('fileId').equals(file.id).toArray(), [file.id]));
@@ -194,18 +201,14 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
   };
 
   // ---- Annotations : dessin libre et notes posées sur la page.
+  const pen = tool === 'marker' ? marker : ink;
   const onInk = useCallback(
     async (p: number, stroke: number[][]) => {
-      const id = newId();
-      lastStrokes.current.push(id);
-      await db.annotations.add({ id, fileId: file.id, page: p, createdAt: Date.now(), kind: 'ink', color: ink.color, strokes: [stroke], width: ink.width });
+      const points = pen.marker ? straighten(stroke, sizes[p - 1], pen.width) : stroke;
+      await history.add({ id: newId(), fileId: file.id, page: p, createdAt: Date.now(), kind: pen.marker ? 'marker' : 'ink', color: pen.color, strokes: [points], width: pen.width });
     },
-    [file.id, ink],
+    [file.id, pen, sizes, history],
   );
-  const undoStroke = async () => {
-    const id = lastStrokes.current.pop();
-    if (id) await db.annotations.delete(id);
-  };
   const onPlaceNote = useCallback(
     async (p: number, x: number, y: number) => {
       const id = newId();
@@ -217,14 +220,27 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
   );
   const startTool = (next: ReaderTool) => {
     if (mode !== 'page') setMode('page');
-    lastStrokes.current = [];
     setTool(next);
     setChrome(true);
   };
 
+  // Annuler et rétablir : on montre la page concernée si elle n'est pas à l'écran.
+  const undo = useCallback(async () => {
+    const p = await history.undo();
+    if (p === null) return;
+    if (p !== pageRef.current) goTo(p);
+    setAnnouncement(t('reader.annotations.undone'));
+  }, [history, goTo, t]);
+  const redo = useCallback(async () => {
+    const p = await history.redo();
+    if (p === null) return;
+    if (p !== pageRef.current) goTo(p);
+    setAnnouncement(t('reader.annotations.redone'));
+  }, [history, goTo, t]);
+
   // ---- Clavier.
-  const keys = useRef({ turn, goTo, toggleBookmark, toggleFullscreen, switchMode, mode, pageCount, canFullscreen });
-  keys.current = { turn, goTo, toggleBookmark, toggleFullscreen, switchMode, mode, pageCount, canFullscreen };
+  const keys = useRef({ turn, goTo, toggleBookmark, toggleFullscreen, switchMode, mode, pageCount, canFullscreen, undo, redo });
+  keys.current = { turn, goTo, toggleBookmark, toggleFullscreen, switchMode, mode, pageCount, canFullscreen, undo, redo };
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const el = e.target as HTMLElement;
@@ -234,6 +250,13 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
         e.preventDefault();
         setSearching(true);
         setChrome(true);
+        return;
+      }
+      if ((e.ctrlKey || e.metaKey) && !e.altKey && (e.key.toLowerCase() === 'z' || e.key.toLowerCase() === 'y')) {
+        e.preventDefault();
+        // Ctrl+Z annule ; Ctrl+Y et Ctrl+Maj+Z rétablissent.
+        if (e.key.toLowerCase() === 'y' || e.shiftKey) void k.redo();
+        else void k.undo();
         return;
       }
       if (e.ctrlKey || e.metaKey || e.altKey) return;
@@ -330,7 +353,7 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
             hits={search.state.hits}
             currentHit={currentHit}
             tool={tool}
-            ink={ink}
+            ink={pen}
             onPage={setPage}
             onZoom={setZoom}
             onTap={onTap}
@@ -399,11 +422,36 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
 
         {/* Outil d'annotation en cours */}
         {tool !== 'none' && (
-          <div className="mx-auto mt-2 flex w-fit max-w-[calc(100%-1rem)] items-center gap-1 rounded-xl border border-line bg-surface p-1 text-ink shadow-lift" role="toolbar" aria-label={t('reader.annotate')}>
-            <span className="flex items-center gap-2 px-2 text-sm font-bold">
-              {tool === 'ink' ? <PenLine className="size-4" aria-hidden="true" /> : <StickyNote className="size-4" aria-hidden="true" />}
-              <span className="hidden sm:inline">{t(tool === 'ink' ? 'reader.annotations.drawHint' : 'reader.annotations.noteHint')}</span>
+          <div className="no-scrollbar mx-auto mt-2 flex w-fit max-w-[calc(100%-1rem)] items-center gap-0.5 overflow-x-auto rounded-xl border border-line bg-surface p-1 text-ink shadow-lift sm:gap-1" role="toolbar" aria-label={t('reader.annotate')}>
+            <span className="flex shrink-0 items-center gap-2 px-1.5 text-sm font-bold sm:px-2">
+              {tool === 'ink' ? <PenLine className="size-4" aria-hidden="true" /> : tool === 'marker' ? <Highlighter className="size-4" aria-hidden="true" /> : <StickyNote className="size-4" aria-hidden="true" />}
+              <span className="hidden sm:inline">{t(tool === 'ink' ? 'reader.annotations.drawHint' : tool === 'marker' ? 'reader.annotations.markerHint' : 'reader.annotations.noteHint')}</span>
             </span>
+            {tool === 'marker' && (
+              <>
+                {HIGHLIGHT_COLORS.map((c) => (
+                  <button
+                    key={c}
+                    type="button"
+                    aria-label={t('reader.annotations.highlightIn', { color: t(`reader.annotations.colors.${c}`) })}
+                    aria-pressed={marker.color === c}
+                    onClick={() => setMarker({ ...marker, color: c })}
+                    className={cn('grid size-9 shrink-0 place-items-center rounded-md sm:size-10', marker.color === c && 'bg-surface-2 ring-2 ring-accent')}
+                  >
+                    <span className="size-6 rounded-full border border-black/20" style={{ background: pastelOf(c) }} />
+                  </button>
+                ))}
+                <button
+                  type="button"
+                  aria-label={t('reader.annotations.width')}
+                  title={t('reader.annotations.width')}
+                  onClick={() => setMarker({ ...marker, width: MARKER_WIDTHS[(MARKER_WIDTHS.indexOf(marker.width) + 1) % MARKER_WIDTHS.length] })}
+                  className="grid size-9 shrink-0 place-items-center rounded-md hover:bg-surface-2 sm:size-10"
+                >
+                  <span className="w-5 rounded-sm" style={{ height: Math.max(4, marker.width * 0.7), background: pastelOf(marker.color), outline: '1px solid rgb(0 0 0 / 0.25)' }} />
+                </button>
+              </>
+            )}
             {tool === 'ink' && (
               <>
                 {[...HIGHLIGHT_COLORS, 'black'].map((c) => (
@@ -413,7 +461,7 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
                     aria-label={t(`reader.annotations.colors.${c}`)}
                     aria-pressed={ink.color === c}
                     onClick={() => setInk({ ...ink, color: c })}
-                    className={cn('grid size-10 place-items-center rounded-md', ink.color === c && 'bg-surface-2 ring-2 ring-accent')}
+                    className={cn('grid size-9 shrink-0 place-items-center rounded-md sm:size-10', ink.color === c && 'bg-surface-2 ring-2 ring-accent')}
                   >
                     <span className="size-5 rounded-full" style={{ background: colorOf(c) }} />
                   </button>
@@ -423,15 +471,20 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
                   aria-label={t('reader.annotations.width')}
                   title={t('reader.annotations.width')}
                   onClick={() => setInk({ ...ink, width: ink.width >= 6 ? 1 : ink.width + (ink.width < 2 ? 1 : 2) })}
-                  className="grid size-10 place-items-center rounded-md hover:bg-surface-2"
+                  className="grid size-9 shrink-0 place-items-center rounded-md hover:bg-surface-2 sm:size-10"
                 >
                   <span className="w-5 rounded-full bg-current" style={{ height: Math.max(2, ink.width * 1.5) }} />
                 </button>
-                <IconButton size="sm" label={t('reader.annotations.undoStroke')} onClick={() => void undoStroke()} className={toolbarButton}><Undo2 /></IconButton>
               </>
             )}
-            <button type="button" onClick={() => setTool('none')} className="inline-flex min-h-10 items-center gap-1.5 rounded-md bg-accent px-3 text-sm font-bold text-accent-ink">
-              <Check className="size-4" aria-hidden="true" /> {t('common.done')}
+            {tool !== 'note' && (
+              <>
+                <IconButton size="sm" label={t('reader.annotations.undo')} disabled={!canUndo} onClick={() => void undo()} className={toolbarButton}><Undo2 /></IconButton>
+                <IconButton size="sm" label={t('reader.annotations.redo')} disabled={!canRedo} onClick={() => void redo()} className={toolbarButton}><Redo2 /></IconButton>
+              </>
+            )}
+            <button type="button" onClick={() => setTool('none')} aria-label={t('common.done')} className="inline-flex min-h-10 shrink-0 items-center gap-1.5 rounded-md bg-accent px-3 text-sm font-bold text-accent-ink">
+              <Check className="size-4" aria-hidden="true" /> <span className="hidden sm:inline">{t('common.done')}</span>
             </button>
           </div>
         )}
@@ -478,7 +531,8 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
         </div>
       </div>
 
-      {mode === 'page' && tool === 'none' && <SelectionToolbar fileId={file.id} onNote={setEditing} />}
+      {mode === 'page' && tool === 'none' && <SelectionToolbar fileId={file.id} history={history} onNote={setEditing} />}
+      <p className="sr-only" role="status" aria-live="polite">{announcement}</p>
 
       <SidePanel
         open={panel !== null}
@@ -505,7 +559,7 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
           <ToolGrid fileIds={[file.id]} compact />
         </div>
       </Drawer>
-      <AnnotationDialog annotation={editingAnnotation} onClose={() => setEditing(null)} />
+      <AnnotationDialog annotation={editingAnnotation} history={history} onClose={() => setEditing(null)} />
       <ExportDialog open={exporting} onClose={() => setExporting(false)} file={file} blob={blob} annotations={annotations} sizes={sizes} />
 
       <Menu
@@ -517,10 +571,17 @@ export function Reader({ file, blob, pdf }: { file: FileRecord; blob: Blob; pdf:
           {
             title: t('reader.annotations.selectHint'),
             items: [
+              { id: 'marker', label: t('reader.annotations.marker'), icon: <Highlighter />, onSelect: () => startTool('marker') },
               { id: 'ink', label: t('reader.annotations.draw'), icon: <PenLine />, onSelect: () => startTool('ink') },
               { id: 'note', label: t('reader.annotations.placeNote'), icon: <StickyNote />, onSelect: () => startTool('note') },
               { id: 'list', label: t('reader.annotations.list', { count: annotations.length }), icon: <Highlighter />, onSelect: () => openPanel('notes') },
               { id: 'export', label: t('reader.export.title'), icon: <FileOutput />, onSelect: () => setExporting(true) },
+            ],
+          },
+          {
+            items: [
+              { id: 'undo', label: t('reader.annotations.undo'), icon: <Undo2 />, disabled: !canUndo, onSelect: () => void undo() },
+              { id: 'redo', label: t('reader.annotations.redo'), icon: <Redo2 />, disabled: !canRedo, onSelect: () => void redo() },
             ],
           },
         ]}

@@ -68,6 +68,7 @@
 
 /* Pendant un dessin ou la pose d'une note, le texte ne capte plus les gestes. */
 .reader[data-tool='ink'] .textLayer,
+.reader[data-tool='marker'] .textLayer,
 .reader[data-tool='note'] .textLayer { pointer-events: none; }
 
 .reader .hl { position: absolute; border-radius: 2px; mix-blend-mode: var(--hl-blend); pointer-events: none; }
@@ -76,6 +77,8 @@
 .reader .hl-blue { background: rgb(140 198 255 / 0.55); }
 .reader .hl-pink { background: rgb(255 160 200 / 0.55); }
 .reader[data-paper='night'] .hl { opacity: 0.45; }
+.reader .marker-layer { mix-blend-mode: var(--hl-blend); opacity: 0.6; pointer-events: none; }
+.reader[data-paper='night'] .marker-layer { opacity: 0.35; }
 .reader .ul { position: absolute; pointer-events: none; border-bottom: 2px solid currentColor; }
 .reader .ul.ul-v { border-bottom: 0; border-left: 2px solid currentColor; }
 .reader .search-hit { position: absolute; border-radius: 2px; background: rgb(255 170 60 / 0.4); pointer-events: none; mix-blend-mode: var(--hl-blend); }

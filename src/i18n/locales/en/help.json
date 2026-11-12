@@ -15,8 +15,15 @@
   "toc": "Open the table of contents",
   "mode": "Switch between Page and Text mode",
   "undo": "Undo",
-  "redo": "Redo",
+  "redo": "Redo (also Ctrl Shift Z)",
   "delete": "Delete the selected element",
   "move": "Move the selected element",
-  "keys": { "Échap": "Esc", "Espace": "Space", "Maj": "Shift", "Suppr": "Del" }
+  "keys": {
+    "Échap": "Esc",
+    "Espace": "Space",
+    "Maj": "Shift",
+    "Suppr": "Del"
+  },
+  "undoAnnotation": "Undo the last annotation or change",
+  "redoAnnotation": "Redo (also Ctrl Shift Z)"
 }

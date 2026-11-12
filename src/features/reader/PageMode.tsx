@@ -45,6 +45,20 @@ const MAX_PAGE_WIDTH = 980;
 const MIN_ZOOM = 0.5;
 const MAX_ZOOM = 5;
 const EMPTY_ANNOTATIONS: AnnotationRecord[] = [];
+
+/** Le point (en pixels) est-il à moins de `tolerance` pixels du trait ? */
+function nearStroke(stroke: number[][], px: number, py: number, w: number, h: number, tolerance: number): boolean {
+  for (let i = 0; i < stroke.length; i++) {
+    const ax = stroke[i][0] * w;
+    const ay = stroke[i][1] * h;
+    const [bx, by] = i + 1 < stroke.length ? [stroke[i + 1][0] * w, stroke[i + 1][1] * h] : [ax, ay];
+    const dx = bx - ax;
+    const dy = by - ay;
+    const k = dx || dy ? Math.min(1, Math.max(0, ((px - ax) * dx + (py - ay) * dy) / (dx * dx + dy * dy))) : 0;
+    if (Math.hypot(px - (ax + k * dx), py - (ay + k * dy)) < tolerance) return true;
+  }
+  return false;
+}
 const EMPTY_HITS: NRect[][] = [];
 
 /** Cadre du contenu d'une page, mesuré sur un rendu basse définition. */
@@ -395,7 +409,7 @@ export const PageMode = forwardRef<PageModeHandle, Props>(function PageMode(
       const list = handlers.current.annotations.get(Number(target.dataset.page)) ?? [];
       for (const a of list) {
         if (a.rects?.some((r) => nx >= r.x && nx <= r.x + r.w && ny >= r.y - 0.004 && ny <= r.y + r.h + 0.004)) return a.id;
-        if (a.kind === 'ink' && a.strokes?.some((s) => s.some(([x, y]) => Math.hypot((x - nx) * sheet.width, (y - ny) * sheet.height) < 14))) return a.id;
+        if ((a.kind === 'ink' || a.kind === 'marker') && a.strokes?.some((s) => nearStroke(s, nx * sheet.width, ny * sheet.height, sheet.width, sheet.height, a.kind === 'marker' ? 16 : 14))) return a.id;
       }
       return null;
     };

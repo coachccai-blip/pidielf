@@ -36,3 +36,7 @@ Toutes les évolutions notables de PidiElf sont consignées ici, phase par phase
 - Sauvegarde et restauration de la bibliothèque en ZIP ; jauge de stockage ; « Tout effacer ».
 - Accessibilité : contrôle axe (WCAG 2.1 AA) en clair et en sombre, aide des raccourcis (touche « ? »).
 - Tests de parcours sur mobile et bureau pour chaque espace et chaque outil.
+
+### Après la première mise en ligne
+- Lecteur : surligneur libre aux couleurs pastel (trait redressé quand il suit une ligne), à côté du dessin.
+- Lecteur : historique des annotations — Ctrl+Z annule, Ctrl+Y ou Ctrl+Maj+Z rétablit (ajout, suppression, couleur, note) ; boutons Annuler et Rétablir dans la barre d'annotation et le menu Annoter.

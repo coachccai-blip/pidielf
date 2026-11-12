@@ -15,7 +15,8 @@ import { toastError, toastSuccess } from '@/ui/toast';
 import { pdfOp } from '@/workers/client';
 import { canShareFiles, downloadBlob, shareFiles } from '@/features/export/actions';
 import { savePdfToLibrary } from '@/features/library/import';
-import { colorOf, isVertical } from './PageView';
+import type { AnnotationHistory } from './history';
+import { colorOf, isVertical, pastelOf } from './PageView';
 import type { PageSize } from './useDocument';
 
 export const HIGHLIGHT_COLORS: HighlightColor[] = ['yellow', 'green', 'blue', 'pink'];
@@ -91,20 +92,17 @@ export function readSelection(): SelectionInfo | null {
   return { quote, pages, bounds: range.getBoundingClientRect() };
 }
 
-export async function addFromSelection(fileId: string, info: SelectionInfo, kind: 'highlight' | 'underline', color: string, text?: string): Promise<string> {
-  let first = '';
-  for (const [page, rects] of info.pages) {
-    const id = newId();
-    first ||= id;
-    await db.annotations.add({ id, fileId, page, createdAt: Date.now(), kind, color, rects, quote: info.quote, text: id === first ? text : undefined });
-  }
-  return first;
+export async function addFromSelection(history: AnnotationHistory, fileId: string, info: SelectionInfo, kind: 'highlight' | 'underline', color: string): Promise<string> {
+  const records: AnnotationRecord[] = [...info.pages].map(([page, rects]) => ({ id: newId(), fileId, page, createdAt: Date.now(), kind, color, rects, quote: info.quote }));
+  // Une sélection à cheval sur plusieurs pages s'annule d'un seul geste.
+  await history.apply(records.map((after) => ({ after })));
+  return records[0].id;
 }
 
 // ---- Barre de sélection -----------------------------------------------------
 
 /** Petite barre qui apparaît quand du texte est sélectionné. */
-export function SelectionToolbar({ fileId, onNote }: { fileId: string; onNote: (id: string) => void }) {
+export function SelectionToolbar({ fileId, history, onNote }: { fileId: string; history: AnnotationHistory; onNote: (id: string) => void }) {
   const t = useT();
   const [info, setInfo] = useState<SelectionInfo | null>(null);
   const bar = useRef<HTMLDivElement>(null);
@@ -128,7 +126,7 @@ export function SelectionToolbar({ fileId, onNote }: { fileId: string; onNote: (
     setInfo(null);
   };
   const act = async (kind: 'highlight' | 'underline', color: string, note = false) => {
-    const id = await addFromSelection(fileId, info, kind, color);
+    const id = await addFromSelection(history, fileId, info, kind, color);
     clear();
     if (note) onNote(id);
   };
@@ -190,20 +188,26 @@ function BarButton({ label, onClick, children }: { label: string; onClick: () =>
 
 // ---- Fiche d'une annotation -------------------------------------------------
 
-export function AnnotationDialog({ annotation, onClose }: { annotation: AnnotationRecord | null; onClose: () => void }) {
+export function AnnotationDialog({ annotation, history, onClose }: { annotation: AnnotationRecord | null; history: AnnotationHistory; onClose: () => void }) {
   const t = useT();
   const [text, setText] = useState('');
   useEffect(() => setText(annotation?.text ?? ''), [annotation?.id]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!annotation) return null;
+  const fresh = annotation.kind === 'note' && !annotation.text;
 
   const save = async () => {
     const value = text.trim();
-    if (annotation.kind === 'note' && !value) await db.annotations.delete(annotation.id);
-    else await db.annotations.update(annotation.id, { text: value || undefined });
+    if (fresh) {
+      // Note tout juste posée : elle n'entre dans l'historique qu'une fois écrite.
+      await db.annotations.delete(annotation.id);
+      if (value) await history.add({ ...annotation, text: value });
+    } else if (annotation.kind === 'note' && !value) await history.remove(annotation.id);
+    else await history.update(annotation.id, { text: value || undefined });
     onClose();
   };
   const remove = async () => {
-    await db.annotations.delete(annotation.id);
+    if (fresh) await db.annotations.delete(annotation.id);
+    else await history.remove(annotation.id);
     onClose();
   };
 
@@ -227,7 +231,7 @@ export function AnnotationDialog({ annotation, onClose }: { annotation: Annotati
             {annotation.quote}
           </blockquote>
         )}
-        {annotation.kind === 'highlight' && (
+        {(annotation.kind === 'highlight' || annotation.kind === 'marker') && (
           <div role="radiogroup" aria-label={t('reader.annotations.color')} className="flex gap-1">
             {HIGHLIGHT_COLORS.map((c) => (
               <button
@@ -236,7 +240,7 @@ export function AnnotationDialog({ annotation, onClose }: { annotation: Annotati
                 role="radio"
                 aria-checked={annotation.color === c}
                 aria-label={t(`reader.annotations.colors.${c}`)}
-                onClick={() => void db.annotations.update(annotation.id, { color: c })}
+                onClick={() => void history.update(annotation.id, { color: c })}
                 className={cn('grid size-11 place-items-center rounded-md', annotation.color === c && 'bg-surface-2 ring-2 ring-accent')}
               >
                 <span className="size-7 rounded-full border border-black/20" style={{ background: swatch[c] }} />
@@ -244,7 +248,7 @@ export function AnnotationDialog({ annotation, onClose }: { annotation: Annotati
             ))}
           </div>
         )}
-        {annotation.kind !== 'ink' && (
+        {annotation.kind !== 'ink' && annotation.kind !== 'marker' && (
           <label className="flex flex-col gap-1.5 text-sm font-bold">
             {t('reader.annotations.noteLabel')}
             <textarea
@@ -280,6 +284,7 @@ export function annotationsToOverlays(annotations: AnnotationRecord[], sizes: Pa
       for (const r of vertical) list.push({ type: 'line', x1: r.x, y1: r.y, x2: r.x, y2: r.y + r.h, stroke: colorOf(a.color), strokeWidth: 1.2 });
     }
     if (a.kind === 'ink' && a.strokes) list.push({ type: 'ink', strokes: a.strokes, color: colorOf(a.color), width: a.width ?? 2 });
+    if (a.kind === 'marker' && a.strokes) list.push({ type: 'ink', strokes: a.strokes, color: pastelOf(a.color), width: a.width ?? 14, opacity: 0.5 });
     if (a.text) {
       const at = a.kind === 'note' ? { x: a.x ?? 0, y: a.y ?? 0 } : a.rects?.[0] ? { x: a.rects[0].x + a.rects[0].w, y: a.rects[0].y } : null;
       if (at) list.push({ type: 'note', x: at.x, y: at.y, text: a.text });

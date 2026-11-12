@@ -21,13 +21,15 @@ const groups: Array<{ title: string; items: Array<[string[], string]> }> = [
       [['B'], 'help.bookmark'],
       [['T'], 'help.toc'],
       [['M'], 'help.mode'],
+      [['Ctrl', 'Z'], 'help.undoAnnotation'],
+      [['Ctrl', 'Y'], 'help.redoAnnotation'],
     ],
   },
   {
     title: 'help.editor',
     items: [
       [['Ctrl', 'Z'], 'help.undo'],
-      [['Ctrl', 'Maj', 'Z'], 'help.redo'],
+      [['Ctrl', 'Y'], 'help.redo'],
       [['Suppr'], 'help.delete'],
       [['←', '↑', '↓', '→'], 'help.move'],
     ],

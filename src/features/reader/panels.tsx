@@ -123,7 +123,7 @@ export function SidePanel({
             ) : (
               <ul className="flex flex-col gap-1.5">
                 {annotations.map((a) => {
-                  const Icon = a.kind === 'highlight' ? Highlighter : a.kind === 'underline' ? Underline : a.kind === 'ink' ? PenLine : StickyNote;
+                  const Icon = a.kind === 'highlight' || a.kind === 'marker' ? Highlighter : a.kind === 'underline' ? Underline : a.kind === 'ink' ? PenLine : StickyNote;
                   return (
                     <li key={a.id} className="flex items-stretch gap-1 rounded-md border border-line">
                       <button type="button" onClick={() => go(a.page)} className="flex min-h-11 min-w-0 flex-1 items-start gap-3 rounded-md px-3 py-2 text-left hover:bg-surface-2">

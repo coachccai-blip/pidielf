@@ -55,7 +55,12 @@
     "modeHint": "Text mode re-flows the text like an e-book. It is a reading aid: columns, tables and formulas may be approximate.",
     "noText": "This PDF contains no text (scanned document). Run OCR to make it readable in Text mode.",
     "paper": "Paper",
-    "papers": { "white": "White", "sepia": "Sepia", "grey": "Soft grey", "night": "Night" },
+    "papers": {
+      "white": "White",
+      "sepia": "Sepia",
+      "grey": "Soft grey",
+      "night": "Night"
+    },
     "brightness": "Brightness",
     "warmth": "Warmth",
     "scroll": "Scrolling",
@@ -84,17 +89,29 @@
   "annotations": {
     "selectionBar": "Actions on the selected text",
     "highlightIn": "Highlight in {{color}}",
-    "colors": { "yellow": "yellow", "green": "green", "blue": "blue", "pink": "pink", "black": "black" },
+    "colors": {
+      "yellow": "yellow",
+      "green": "green",
+      "blue": "blue",
+      "pink": "pink",
+      "black": "black"
+    },
     "color": "Colour",
     "underline": "Underline",
     "addNote": "Add a note",
     "copy": "Copy",
     "copied": "Text copied.",
-    "kinds": { "highlight": "Highlight", "underline": "Underline", "note": "Note", "ink": "Drawing" },
+    "kinds": {
+      "highlight": "Highlight",
+      "underline": "Underline",
+      "note": "Note",
+      "ink": "Drawing",
+      "marker": "Free highlight"
+    },
     "noteLabel": "Note",
     "openNote": "Open note: {{text}}",
     "edit": "Edit annotation",
-    "selectHint": "Select text to highlight it",
+    "selectHint": "Select text to highlight it, or highlight freely",
     "draw": "Draw on the page",
     "placeNote": "Place a note",
     "list_one": "See the annotation ({{count}})",
@@ -102,7 +119,12 @@
     "drawHint": "Draw on the page",
     "noteHint": "Tap the page to place the note",
     "width": "Stroke width",
-    "undoStroke": "Undo last stroke"
+    "marker": "Highlight with a marker",
+    "markerHint": "Highlight on the page",
+    "undo": "Undo",
+    "redo": "Redo",
+    "undone": "Last change undone.",
+    "redone": "Change restored."
   },
   "export": {
     "title": "Export",

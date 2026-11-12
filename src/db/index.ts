@@ -43,7 +43,8 @@ export interface AnnotationRecord {
   fileId: string;
   page: number;
   createdAt: number;
-  kind: 'highlight' | 'underline' | 'note' | 'ink';
+  /** `marker` : surlignage libre, tracé au surligneur ; `ink` : dessin au trait. */
+  kind: 'highlight' | 'underline' | 'note' | 'ink' | 'marker';
   color: HighlightColor | string;
   /** Surlignage, soulignement : rectangles couvrant le texte. */
   rects?: NRect[];

@@ -17,7 +17,7 @@ Gratuit, sans compte, sans serveur : vos fichiers ne quittent jamais votre appar
   recompose le texte comme dans un livre numérique (police, taille, interligne, marges).
 - **Se repérer** — reprise à la dernière page lue, sommaire, miniatures, marque-pages, recherche
   plein texte insensible aux accents.
-- **Annoter** — surlignage (quatre couleurs), soulignement, notes, dessin libre. Les annotations
+- **Annoter** — surlignage du texte sélectionné ou tracé librement au surligneur (quatre couleurs pastel), soulignement, notes, dessin libre ; chaque modification s'annule et se rétablit (Ctrl+Z, Ctrl+Y). Les annotations
   restent dans la bibliothèque ; le fichier d'origine n'est jamais modifié. Export en PDF annoté,
   en texte ou en Markdown.
 - **Ranger** — une bibliothèque locale (IndexedDB) : grille ou liste, recherche, tri, favoris,
@@ -186,7 +186,7 @@ Free, no account, no server: your files never leave your device.
   like an e-book (font, size, line spacing, margins).
 - **Navigate** — resumes at the last page read, table of contents, thumbnails, bookmarks,
   accent-insensitive full-text search.
-- **Annotate** — highlight (four colours), underline, notes, free drawing. Annotations stay in the
+- **Annotate** — highlight selected text or draw freely with a marker (four pastel colours), underline, notes, free drawing; every change can be undone and redone (Ctrl+Z, Ctrl+Y). Annotations stay in the
   library; the original file is never modified. Export as annotated PDF, text or Markdown.
 - **Organise** — a local library (IndexedDB): grid or list, search, sort, favourites, shelves,
   filters, multi-selection, derived versions, ZIP backup and restore.
